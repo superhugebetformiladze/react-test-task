@@ -12,7 +12,7 @@ export default function Layout({ children }: any) {
 
     return (
         <AppWrapper>
-            <Flex flexDirection="column" alignItems="center" justifyContent="center">
+            <Flex flexDirection="column" alignItems="center" justifyContent="center" padding="1rem">
                 <Header></Header>
                 <main>{children}</main>
                 <Footer></Footer>

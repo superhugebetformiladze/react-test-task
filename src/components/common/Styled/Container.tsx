@@ -9,18 +9,14 @@ interface StylesProps{
     bacgroundColor?: string;
 }
 
-const StyledFlex = styled.div<StylesProps>`
-    display: flex;
-    flex-direction: ${props => props.flexDirection || 'row'};
-    align-items: ${props => props.alignItems || 'stretch'};
-    justify-content: ${props => props.justifyContent || 'stretch'};
+const StyledContainer = styled.div<StylesProps>`
     padding: ${props => props.padding || '0'};
     margin: ${props => props.margin || '0'};
     background-color: ${props => props.color || 'unset'};
 `
 
-const Flex = (props: any) => {
-    return <StyledFlex {...props} />
+const Container = (props: any) => {
+    return <StyledContainer {...props} />
 }
 
-export default Flex
+export default Container

@@ -11,6 +11,7 @@ const theme = {
     primary: "#f3f3f3",
     textColor: "#222222",
     white: "#ffffff",
+    header: "#ffffff",
   }
 }
 

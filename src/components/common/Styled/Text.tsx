@@ -6,6 +6,7 @@ interface StylesProps{
     lineHeight?: string;
     margin?: string;
     cursor?: string;
+    bacgroundColor?: string;
 }
 
 const StyledText = styled.div<StylesProps>`
@@ -14,6 +15,7 @@ const StyledText = styled.div<StylesProps>`
     font-weight: ${props => props.fontWeight || '400'};
     margin: ${props => props.margin || '0'};
     cursor: ${props => props.cursor || 'auto'};
+    background-color: ${props => props.color || 'unset'};
 `
 
 const Text = (props: any) => {
