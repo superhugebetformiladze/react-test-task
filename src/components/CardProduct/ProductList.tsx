@@ -3,6 +3,7 @@ import axios from "axios";
 import CardProduct from "./CardProduct";
 import { IProduct } from "../../models";
 import Flex from "../common/Styled/Flex";
+import useWindowSize from "../../hooks/useWindowSize";
 
 interface ProductListProps {
     displayCount?: number;
@@ -31,6 +32,9 @@ axios.interceptors.request.use(config => {
 
 const ProductList: React.FC<ProductListProps> = ({ displayCount = 4, showAll = false }) => {
     const [products, setProducts] = useState<IProduct[]>([]);
+    const { width } = useWindowSize();
+    const isTablet = width && width <= 768;
+    const isMobile = width && width <= 480;
 
     useEffect(() => {
         const fetchData = async () => {
@@ -46,9 +50,9 @@ const ProductList: React.FC<ProductListProps> = ({ displayCount = 4, showAll = f
     }, [displayCount, showAll]);
 
     return (
-        <Flex flexDirection="row" padding="2rem" width="100%" justifyContent="center">
+        <Flex flexDirection="row" padding={isTablet ? "2rem 1rem" : "2rem"} width="100%" justifyContent="center">
             {products.map((product) => (
-                <CardProduct key={product.id} product={product} width="16rem" margin="1rem" />
+                <CardProduct key={product.id} product={product} width={isMobile ? "14rem" : "16rem"} margin="1rem" />
             ))}
         </Flex>
     );

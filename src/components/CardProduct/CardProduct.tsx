@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { IProduct } from "../../models";
 import Flex from "../common/Styled/Flex";
 import Text from "../common/Styled/Text";
+import useWindowSize from "../../hooks/useWindowSize";
 
 
 interface ProductProps {
@@ -14,6 +15,11 @@ interface StylesProps {
     margin?: string;
 }
 
+interface StylesImgProps {
+    height?: string;
+    width?: string;
+}
+
 const StyledCardProduct = styled.div<StylesProps>`
     height: ${props => props.height || 'auto'};
     width: ${props => props.width || 'auto'};
@@ -23,7 +29,7 @@ const StyledCardProduct = styled.div<StylesProps>`
 
 const StyleImage = styled.img`
     border-radius: 24px;
-    height: 18rem;
+    height: ${props => props.height || '18rem'};
     width: 100%;
     object-fit: scale-down;
     background-color: ${props => props.color || props.theme.colors.white};
@@ -32,10 +38,14 @@ const StyleImage = styled.img`
 `
 
 const CardProduct = ({ product, ...props }: ProductProps & StylesProps) => {
+    const { width } = useWindowSize();
+    const isMobile = width && width <= 480;
     return (
         <StyledCardProduct {...props}>
-            <Flex flexDirection="column" alignItems="center" justifyContent="center"> 
-                <StyleImage src={product.image} alt="product" />
+            <Flex flexDirection="column" alignItems="center" justifyContent="center">
+                {isMobile ? (<StyleImage src={product.image} alt="product" height="14rem"/>) : 
+                (<StyleImage src={product.image} alt="product" />)}
+
                 <Text margin="0 0 1rem" cursor="pointer">{product.title}</Text>
                 <Text fontWeight="600" cursor="pointer">{product.price}$</Text>
             </Flex>

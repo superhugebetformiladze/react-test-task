@@ -1,8 +1,10 @@
-import styled from "styled-components";
+import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
 import Flex from "../Styled/Flex";
 import Text from "../Styled/Text";
-import { Link } from 'react-router-dom'
-
+import { Link } from 'react-router-dom';
+import useWindowSize from "../../../hooks/useWindowSize";
+import { Hamburger } from "../../BurgerMenu/Hamburger";
 
 interface StylesProps {
     height?: string;
@@ -17,24 +19,67 @@ const StyledHeader = styled.div<StylesProps>`
 `
 
 const Header = (props: any) => {
+    const { width } = useWindowSize();
+    const [menuOpen, setMenuOpen] = useState(false);
+    const isTablet = width && width <= 768;
+
+    const toggleMenu = () => {
+        setMenuOpen(!menuOpen);
+    }
+
+    const closeMenu = () => {
+        setMenuOpen(false);
+    }
+
+    useEffect(() => {
+        if (menuOpen) {
+            const handleClickOutside = (event: MouseEvent) => {
+                const target = event.target as HTMLElement;
+                const header = document.getElementById('header');
+
+                if (header && !header.contains(target)) {
+                    closeMenu();
+                }
+            };
+
+            document.addEventListener('mousedown', handleClickOutside);
+
+            return () => {
+                document.removeEventListener('mousedown', handleClickOutside);
+            };
+        }
+    }, [menuOpen]);
+
     return (
-        <StyledHeader {...props}>
+        <StyledHeader {...props} id="header">
             <Flex flexDirection="row" alignItems="center" justifyContent="space-between" padding="1rem 2rem">
-                <Link to="/">
+                <Link to="/" onClick={closeMenu}>
                     <Text fontWeight="600" cursor="pointer" fontSize="2rem">Logo</Text>
                 </Link>
-                <Flex flexDirection="row" alignItems="center">
-                    <Link to="/">
-                        <Text cursor="pointer" margin="0 1rem 0 0">Главная</Text>
+                {isTablet ? 
+                    (<Hamburger onClick={toggleMenu} isInitiallyOpen={menuOpen} />) : 
+                    (<Flex flexDirection="row" alignItems="center">
+                        <Link to="/" onClick={closeMenu}>
+                            <Text cursor="pointer" margin="0 1rem 0 0">Главная</Text>
+                        </Link>
+                        <Link to="/catalog" onClick={closeMenu}>
+                            <Text cursor="pointer">Каталог</Text>
+                        </Link>
+                    </Flex>)
+                }
+            </Flex>
+            {isTablet && menuOpen && (
+                <Flex flexDirection="column" alignItems="center">
+                    <Link to="/" onClick={closeMenu}>
+                        <Text cursor="pointer" margin="1rem 0">Главная</Text>
                     </Link>
-                    <Link to="/catalog">
-                        <Text cursor="pointer">Каталог</Text>
+                    <Link to="/catalog" onClick={closeMenu}>
+                        <Text cursor="pointer" margin="1rem 0">Каталог</Text>
                     </Link>
                 </Flex>
-            </Flex>
+            )}
         </StyledHeader>
-
     )
 }
 
-export default Header
+export default Header;
