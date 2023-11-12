@@ -1,8 +1,9 @@
-import { Routes, Route } from "react-router-dom";
-import { ProductsPage } from "./pages/ProductsPage";
-import { CategoriesPage } from "./pages/CategoriesPage";
+import React from 'react';
+import { Route, Routes } from "react-router-dom";
+import { ProductsPage } from "./pages/MainPage/ProductsPage";
+import { CatalogPage } from "./pages/CatalogPage";
 import Layout from "./components/common/Layout/Layout";
-
+import NotFoundPage from "./pages/NotFoundPage";
 
 
 function App() {
@@ -10,7 +11,8 @@ function App() {
     <Layout>
       <Routes>
         <Route path="/" element={<ProductsPage />} />
-        <Route path="/categories" element={<CategoriesPage />} />
+        <Route path="/catalog" element={<CatalogPage />} />
+        <Route element={<NotFoundPage />} />
       </Routes>
     </Layout>
   )

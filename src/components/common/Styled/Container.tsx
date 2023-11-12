@@ -6,7 +6,6 @@ interface StylesProps{
     justifyContent?: string;
     padding?: string;
     margin?: string;
-    bacgroundColor?: string;
 }
 
 const StyledContainer = styled.div<StylesProps>`

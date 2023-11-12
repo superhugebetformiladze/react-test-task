@@ -5,8 +5,12 @@ interface StylesProps{
     fontWeight?: string;
     lineHeight?: string;
     margin?: string;
+    padding?: string;
     cursor?: string;
     bacgroundColor?: string;
+    width?: string;
+    height?: string;
+    textAlign?: string;
 }
 
 const StyledText = styled.div<StylesProps>`
@@ -14,8 +18,12 @@ const StyledText = styled.div<StylesProps>`
     font-size: ${props => props.fontSize || '1rem'};
     font-weight: ${props => props.fontWeight || '400'};
     margin: ${props => props.margin || '0'};
+    padding: ${props => props.padding || '0'};
     cursor: ${props => props.cursor || 'auto'};
-    background-color: ${props => props.color || 'unset'};
+    background-color: ${props => props.bacgroundColor || 'unset'};
+    width: ${props => props.width || 'auto'};
+    height: ${props => props.height || 'auto'};
+    text-align: ${props => props.textAlign || 'unset'};
 `
 
 const Text = (props: any) => {

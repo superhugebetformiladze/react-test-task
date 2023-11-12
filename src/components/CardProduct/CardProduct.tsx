@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { IProduct } from "../models";
-import Flex from "./common/Styled/Flex";
-import Text from "./common/Styled/Text";
+import { IProduct } from "../../models";
+import Flex from "../common/Styled/Flex";
+import Text from "../common/Styled/Text";
 
 
 interface ProductProps {
@@ -11,11 +11,13 @@ interface ProductProps {
 interface StylesProps {
     height?: string;
     width?: string;
+    margin?: string;
 }
 
 const StyledCardProduct = styled.div<StylesProps>`
     height: ${props => props.height || 'auto'};
     width: ${props => props.width || 'auto'};
+    margin: ${props => props.margin || '0'};
     cursor: pointer;
 `
 

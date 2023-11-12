@@ -6,12 +6,15 @@ import { BrowserRouter } from 'react-router-dom'
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import WebFont from 'webfontloader';
 
-const theme = {
+export const theme = {
   colors: {
     primary: "#f3f3f3",
     textColor: "#222222",
     white: "#ffffff",
     header: "#ffffff",
+    footer: "#000000",
+    button: "#f84c26",
+    buttonHover: "#df4422",
   }
 }
 
@@ -21,7 +24,7 @@ const Global = createGlobalStyle`
 	margin: 0px;
 	border: none;
   font-family: Manrope;
-  background-color: ${theme.colors.primary};
+  background-color: unset;
 }
 *,
 *::before,
