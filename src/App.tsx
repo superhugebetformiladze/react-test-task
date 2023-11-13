@@ -1,10 +1,10 @@
 import React from 'react';
 import { Route, Routes } from "react-router-dom";
-import { ProductsPage } from "./pages/MainPage/ProductsPage";
-import { CatalogPage } from "./pages/CatalogPage";
-import Layout from "./components/common/Layout/Layout";
-import NotFoundPage from "./pages/NotFoundPage";
-import ProductPage from './pages/ProductPage';
+import { ProductsPage } from "@pages/MainPage/ProductsPage";
+import { CatalogPage } from "@pages/CatalogPage";
+import Layout from "@components-common/Layout/Layout";
+import NotFoundPage from "@pages/NotFoundPage";
+import { ProductPage } from '@pages/ProductPage';
 
 
 function App() {

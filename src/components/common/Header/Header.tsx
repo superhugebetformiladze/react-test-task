@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import Flex from "../Styled/Flex";
-import Text from "../Styled/Text";
+import Flex from "@components-common/Styled/Flex";
+import Text from "@components-common/Styled/Text";
 import { Link } from 'react-router-dom';
-import useWindowSize from "../../../hooks/useWindowSize";
-import { Hamburger } from "../../BurgerMenu/Hamburger";
+import useWindowSize from "@/hooks/useWindowSize";
+import { Hamburger } from "@components/BurgerMenu/Hamburger";
 
 interface StylesProps {
     height?: string;

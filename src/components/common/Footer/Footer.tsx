@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import Flex from "../Styled/Flex";
-import Text from "../Styled/Text";
+import Flex from "@components-common/Styled/Flex";
+import Text from "@components-common/Styled/Text";
 import { Link } from 'react-router-dom'
-import { theme } from "../../..";
-import Button from "../Button/Button";
-import useWindowSize from "../../../hooks/useWindowSize";
+import { theme } from "@/index";
+import Button from "@components-common/Button/Button";
+import useWindowSize from "@hooks/useWindowSize";
 
 
 interface StylesProps {
