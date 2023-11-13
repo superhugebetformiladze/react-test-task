@@ -4,6 +4,7 @@ import CardProduct from "./CardProduct";
 import { IProduct } from "../../models";
 import Flex from "../common/Styled/Flex";
 import useWindowSize from "../../hooks/useWindowSize";
+import { Link } from "react-router-dom";
 
 interface ProductListProps {
     displayCount?: number;
@@ -52,7 +53,9 @@ const ProductList: React.FC<ProductListProps> = ({ displayCount = 4, showAll = f
     return (
         <Flex flexDirection="row" padding={isTablet ? "2rem 1rem" : "2rem"} width="100%" justifyContent="center">
             {products.map((product) => (
-                <CardProduct key={product.id} product={product} width={isMobile ? "14rem" : "16rem"} margin="1rem" />
+                <Link key={product.id} to={`/product/${product.id}`}>
+                    <CardProduct key={product.id} product={product} width={isMobile ? "14rem" : "16rem"} margin="1rem" />
+                </Link>
             ))}
         </Flex>
     );
