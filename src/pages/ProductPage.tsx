@@ -1,23 +1,25 @@
-import React, { useState } from "react";
+import React from "react";
 import { useParams } from "react-router-dom";
 import useWindowSize from "@hooks/useWindowSize";
 import Flex from "@components-common/Styled/Flex";
 import Image from "@components-common/Styled/Image";
 import Text from "@components-common/Styled/Text";
 import { useFetchProductById } from '@hooks/useFetchProductById';
-import { IProduct } from "@models/ProductModel";
 import { theme } from "@/index";
 
 export function ProductPage() {
   const { id } = useParams<{ id: string }>();
   const { width } = useWindowSize();
   const isTablet = width && width <= 768;
-  const [product, setProduct] = useState<IProduct | null>(null);
 
-  useFetchProductById({ id: id, setProduct });
+  const { product, isLoading } = useFetchProductById({ id: id });
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
 
   if (!product) {
-    return null;
+    return <p>No product found</p>;
   }
 
   return (

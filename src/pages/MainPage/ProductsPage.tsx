@@ -17,7 +17,7 @@ interface StylesProps {
   height?: string;
 }
 
-const StyledCatalog = styled.div<StylesProps>`
+const StyledCatalogBanner = styled.div<StylesProps>`
   padding: ${props => props.padding || '0'};
   margin: ${props => props.margin || '0'};
   background-color: #000;
@@ -28,11 +28,11 @@ const StyledCatalog = styled.div<StylesProps>`
   border-radius: 24px;
 `
 
-const Catalog = (props: any) => {
+const CatalogBanner = (props: any) => {
   const { width } = useWindowSize();
   const isTablet = width && width <= 768;
   return (
-    <StyledCatalog {...props}>
+    <StyledCatalogBanner {...props}>
       {isTablet ?
         (<Flex flexDirection="column" height="100%" width="100%" alignItems="center" justifyContent="flex-end" flexWrap="nowrap">
           <Text fontSize="1.5rem" margin="2rem 0" fontWeight="600" color={theme.colors.white}>Продажа ингредиентов и вендингового оборудования</Text>
@@ -47,7 +47,7 @@ const Catalog = (props: any) => {
           </Link>
         </Flex>)
       }
-    </StyledCatalog>
+    </StyledCatalogBanner>
   )
 }
 
@@ -58,11 +58,13 @@ export function ProductsPage() {
     <>
       <Flex flexDirection="column" width="100%" alignItems="center">
         {isTablet ?
-          (<Catalog margin="2rem 0" padding="8rem 2rem 2rem 2rem" height="auto" />) :
-          (<Catalog margin="2rem 0" padding="4rem" />)}
+          (<CatalogBanner margin="2rem 0" padding="8rem 2rem 2rem 2rem" height="auto" />) :
+          (<CatalogBanner margin="2rem 0" padding="4rem" />)
+        }
         {isTablet ?
           (<Text fontSize="2rem" fontWeight="600" width="100%" padding="4rem 0 0 0" textAlign="center">Наши товары</Text>) :
-          (<Text fontSize="2rem" fontWeight="600" width="100%" padding="4rem 0 0 4rem">Наши товары</Text>)}
+          (<Text fontSize="2rem" fontWeight="600" width="100%" padding="4rem 0 0 4rem">Наши товары</Text>)
+        }
         <ProductList />
         <Link to="/catalog">
           <Button border="1px solid" borderColor={theme.colors.button} borderRadius="24px" padding="1rem 2rem"

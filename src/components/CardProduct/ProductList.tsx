@@ -12,10 +12,18 @@ interface ProductListProps {
 }
 
 const ProductList: React.FC<ProductListProps> = ({ displayCount = 4, showAll = false }) => {
-    const { products } = useFetchProducts({ displayCount, showAll });
+    const { products, isLoading } = useFetchProducts({ displayCount, showAll });
     const { width } = useWindowSize();
     const isTablet = width && width <= 768;
     const isMobile = width && width <= 480;
+
+    if (isLoading) {
+        return <p>Loading...</p>;
+    }
+
+    if (!products) {
+        return <p>No products found</p>;
+    }
 
     return (
         <Flex flexDirection="row" padding={isTablet ? "2rem 1rem" : "2rem"} width="100%" justifyContent="center">

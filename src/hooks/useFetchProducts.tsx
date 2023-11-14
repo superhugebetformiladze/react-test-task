@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
-import { fetchProducts } from '@utils/axios';
-import { IProduct } from '@models/ProductModel';
+import { useDispatch, useSelector } from 'react-redux';
+import { Dispatch } from 'redux';
+import { fetchProductsAsync } from '@redux/thunks';
+import { RootState } from '@redux/rootReducer';
 
 interface UseFetchProductsProps {
   displayCount?: number;
@@ -8,21 +10,26 @@ interface UseFetchProductsProps {
 }
 
 export const useFetchProducts = ({ displayCount = 4, showAll = false }: UseFetchProductsProps) => {
-  const [products, setProducts] = useState<IProduct[]>([]);
+  const dispatch: Dispatch<any> = useDispatch()
+  const products = useSelector((state: RootState) => state.products.data)
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const productsData = await fetchProducts();
-        setProducts(showAll ? productsData : productsData.slice(0, displayCount));
+        setIsLoading(true);
+        await dispatch(fetchProductsAsync(displayCount, showAll))
+        setIsLoading(false);
       } catch (error) {
         console.error("Error setting products:", error);
       }
     };
 
     fetchData();
-  }, [displayCount, showAll]);
+  }, [displayCount, showAll, dispatch]);
 
-  return { products };
+  return {
+    products,
+    isLoading,
+  };
 };
-
