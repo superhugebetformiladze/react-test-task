@@ -29,7 +29,11 @@
     "start": "craco start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "format": "prettier --write src/**/*.{ts,tsx,scss,css,json}",
+    "lint": "tsc --noEmit && eslint src/**/*.ts{,x} --color",
+    "lint-staged": "lint-staged",
+    "prepare": "husky install"
   },
   "eslintConfig": {
     "extends": [
@@ -53,7 +57,21 @@
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@types/webfontloader": "^1.6.37",
     "craco-alias": "^3.0.1",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.1.0",
+    "prettier": "^3.1.0",
     "tailwindcss": "^3.3.5"
   },
-  "proxy": "https://fakestoreapi.com"
+  "proxy": "https://fakestoreapi.com",
+  "lint-staged": {
+    "*.ts": "npx tsc --noEmit",
+    "*.{js,jsx,ts,tsx,html,css}": "npx prettier --check",
+    "*.{js,jsx,ts,tsx}": [
+      "npx eslint",
+      "prettier --write",
+      "git add"
+    ]
+  }
 }

@@ -1,7 +1,7 @@
-import { IProduct } from '@models/ProductModel';
+import { IProduct } from "@models/ProductModel";
 
 export interface ProductsState {
-  data: IProduct[]
+  data: IProduct[];
 }
 
 const initialState: ProductsState = {
@@ -10,7 +10,7 @@ const initialState: ProductsState = {
 
 export const productsReducer = (state = initialState, action: any) => {
   switch (action.type) {
-    case 'SET_PRODUCTS':
+    case "SET_PRODUCTS":
       return {
         ...state,
         data: action.payload,

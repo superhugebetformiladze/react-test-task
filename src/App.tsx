@@ -1,13 +1,12 @@
-import React from 'react';
+import React from "react";
 import { Route, Routes } from "react-router-dom";
 import { ProductsPage } from "@pages/MainPage/ProductsPage";
 import { CatalogPage } from "@pages/CatalogPage";
 import Layout from "@components-common/Layout/Layout";
 import NotFoundPage from "@pages/NotFoundPage";
-import { ProductPage } from '@pages/ProductPage';
-import { Provider } from 'react-redux';
-import store from '@redux/store';
-
+import { ProductPage } from "@pages/ProductPage";
+import { Provider } from "react-redux";
+import store from "@redux/store";
 
 function App() {
   return (
@@ -21,8 +20,7 @@ function App() {
         </Routes>
       </Layout>
     </Provider>
-
-  )
+  );
 }
 
 export default App;

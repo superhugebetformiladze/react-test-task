@@ -1,31 +1,15 @@
 {
-    "compilerOptions":{
-       "baseUrl":"./src",
-       "paths":{
-          "@components/*":[
-             "./components/*"
-          ],
-          "@models/*":[
-             "./models/*"
-          ],
-          "@hooks/*":[
-             "./hooks/*"
-          ],
-          "@pages/*":[
-             "./pages/*"
-          ],
-          "@components-common/*":[
-             "./components/common/*"
-          ],
-          "@utils/*":[
-             "./utils/*"
-          ],
-          "@redux/*":[
-             "./redux/*"
-          ],
-          "@/*":[
-             "./*"
-          ]
-       }
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "@components/*": ["./components/*"],
+      "@models/*": ["./models/*"],
+      "@hooks/*": ["./hooks/*"],
+      "@pages/*": ["./pages/*"],
+      "@components-common/*": ["./components/common/*"],
+      "@utils/*": ["./utils/*"],
+      "@redux/*": ["./redux/*"],
+      "@/*": ["./*"]
     }
- }
+  }
+}
