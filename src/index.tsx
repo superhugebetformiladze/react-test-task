@@ -1,22 +1,22 @@
-import React, { useEffect } from "react";
-import ReactDOM from "react-dom/client";
-import "@/index.css";
-import App from "@/App";
-import { BrowserRouter } from "react-router-dom";
-import { createGlobalStyle, ThemeProvider } from "styled-components";
-import WebFont from "webfontloader";
+import React, { useEffect } from 'react'
+import ReactDOM from 'react-dom/client'
+import '@/index.css'
+import App from '@/App'
+import { BrowserRouter } from 'react-router-dom'
+import { createGlobalStyle, ThemeProvider } from 'styled-components'
+import WebFont from 'webfontloader'
 
 export const theme = {
   colors: {
-    primary: "#f3f3f3",
-    textColor: "#222222",
-    white: "#ffffff",
-    header: "#ffffff",
-    footer: "#000000",
-    button: "#f84c26",
-    buttonHover: "#df4422",
+    primary: '#f3f3f3',
+    textColor: '#222222',
+    white: '#ffffff',
+    header: '#ffffff',
+    footer: '#000000',
+    button: '#f84c26',
+    buttonHover: '#df4422',
   },
-};
+}
 
 const Global = createGlobalStyle`
 * {
@@ -37,16 +37,16 @@ a, a:link, a:visited  {
 a:hover  {
     text-decoration: none;
 }
-`;
+`
 
 const AppWrapper = () => {
   useEffect(() => {
     WebFont.load({
       google: {
-        families: ["Manrope"],
+        families: ['Manrope'],
       },
-    });
-  }, []);
+    })
+  }, [])
 
   return (
     <BrowserRouter>
@@ -55,11 +55,9 @@ const AppWrapper = () => {
         <App />
       </ThemeProvider>
     </BrowserRouter>
-  );
-};
+  )
+}
 
-const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement,
-);
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 
-root.render(<AppWrapper />);
+root.render(<AppWrapper />)

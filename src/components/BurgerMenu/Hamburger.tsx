@@ -1,23 +1,23 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react'
 
 export interface HamburgerProps {
-  onClick: () => void;
+  onClick: () => void
 
-  isInitiallyOpen?: boolean;
+  isInitiallyOpen?: boolean
 }
 
 export function Hamburger(props: HamburgerProps) {
-  const { onClick, isInitiallyOpen } = props;
-  const [isOpen, setIsOpen] = useState<boolean>(isInitiallyOpen ?? false);
+  const { onClick, isInitiallyOpen } = props
+  const [isOpen, setIsOpen] = useState<boolean>(isInitiallyOpen ?? false)
 
   const handleClick = () => {
-    setIsOpen((prev) => !prev);
-    onClick();
-  };
+    setIsOpen((prev) => !prev)
+    onClick()
+  }
 
   useEffect(() => {
-    setIsOpen(isInitiallyOpen ?? false);
-  }, [isInitiallyOpen]);
+    setIsOpen(isInitiallyOpen ?? false)
+  }, [isInitiallyOpen])
 
   return (
     <button
@@ -27,19 +27,19 @@ export function Hamburger(props: HamburgerProps) {
     >
       <div
         className={`bg-black block w-8 h-[0.35rem] rounded transition-all origin-[1px] ${
-          isOpen ? "rotate-45" : "rotate-0"
+          isOpen ? 'rotate-45' : 'rotate-0'
         }`}
       />
       <div
         className={`bg-black block w-8 h-[0.35rem] rounded transition-all origin-[1px] ${
-          isOpen ? "translate-x-full bg-transparent" : "translate-x-0"
+          isOpen ? 'translate-x-full bg-transparent' : 'translate-x-0'
         }`}
       />
       <div
         className={`bg-black block w-8 h-[0.35rem] rounded transition-all origin-[1px] ${
-          isOpen ? "rotate-[-45deg]" : "rotate-0"
+          isOpen ? 'rotate-[-45deg]' : 'rotate-0'
         }`}
       />
     </button>
-  );
+  )
 }

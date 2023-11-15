@@ -1,25 +1,25 @@
-import React from "react";
-import { useParams } from "react-router-dom";
-import useWindowSize from "@hooks/useWindowSize";
-import Flex from "@components-common/Styled/Flex";
-import Image from "@components-common/Styled/Image";
-import Text from "@components-common/Styled/Text";
-import { useFetchProductById } from "@hooks/useFetchProductById";
-import { theme } from "@/index";
+import React from 'react'
+import { useParams } from 'react-router-dom'
+import useWindowSize from '@hooks/useWindowSize'
+import Flex from '@components-common/Styled/Flex'
+import Image from '@components-common/Styled/Image'
+import Text from '@components-common/Styled/Text'
+import { useFetchProductById } from '@hooks/useFetchProductById'
+import { theme } from '@/index'
 
 export function ProductPage() {
-  const { id } = useParams<{ id: string }>();
-  const { width } = useWindowSize();
-  const isTablet = width && width <= 768;
+  const { id } = useParams<{ id: string }>()
+  const { width } = useWindowSize()
+  const isTablet = width && width <= 768
 
-  const { product, isLoading } = useFetchProductById({ id: id });
+  const { product, isLoading } = useFetchProductById({ id: id })
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <p>Loading...</p>
   }
 
   if (!product) {
-    return <p>No product found</p>;
+    return <p>No product found</p>
   }
 
   return (
@@ -84,5 +84,5 @@ export function ProductPage() {
         </Flex>
       )}
     </>
-  );
+  )
 }

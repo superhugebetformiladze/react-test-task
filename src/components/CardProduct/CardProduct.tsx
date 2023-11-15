@@ -1,31 +1,31 @@
-import styled from "styled-components";
-import { IProduct } from "@models/ProductModel";
-import Flex from "@components-common/Styled/Flex";
-import Text from "@components/common/Styled/Text";
-import useWindowSize from "@hooks/useWindowSize";
-import Image from "@components-common/Styled/Image";
-import { theme } from "@/index";
+import styled from 'styled-components'
+import { IProduct } from '@models/ProductModel'
+import Flex from '@components-common/Styled/Flex'
+import Text from '@components/common/Styled/Text'
+import useWindowSize from '@hooks/useWindowSize'
+import Image from '@components-common/Styled/Image'
+import { theme } from '@/index'
 
 interface ProductProps {
-  product: IProduct;
+  product: IProduct
 }
 
 interface StylesProps {
-  height?: string;
-  width?: string;
-  margin?: string;
+  height?: string
+  width?: string
+  margin?: string
 }
 
 const StyledCardProduct = styled.div<StylesProps>`
-  height: ${(props) => props.height || "auto"};
-  width: ${(props) => props.width || "auto"};
-  margin: ${(props) => props.margin || "0"};
+  height: ${(props) => props.height || 'auto'};
+  width: ${(props) => props.width || 'auto'};
+  margin: ${(props) => props.margin || '0'};
   cursor: pointer;
-`;
+`
 
 const CardProduct = ({ product, ...props }: ProductProps & StylesProps) => {
-  const { width } = useWindowSize();
-  const isMobile = width && width <= 480;
+  const { width } = useWindowSize()
+  const isMobile = width && width <= 480
   return (
     <StyledCardProduct {...props}>
       <Flex flexDirection="column" alignItems="center" justifyContent="center">
@@ -62,7 +62,7 @@ const CardProduct = ({ product, ...props }: ProductProps & StylesProps) => {
         </Text>
       </Flex>
     </StyledCardProduct>
-  );
-};
+  )
+}
 
-export default CardProduct;
+export default CardProduct
