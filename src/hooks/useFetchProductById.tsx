@@ -1,7 +1,7 @@
 import { Dispatch, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchProductByIdAsync } from '@redux/thunks'
-import { RootState } from '@redux/rootReducer'
+import { RootState } from '@redux/reducers/rootReducer'
 
 interface UseFetchProductByIdProps {
   id: string | undefined

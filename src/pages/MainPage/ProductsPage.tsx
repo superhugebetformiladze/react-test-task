@@ -9,9 +9,9 @@ import { Link } from 'react-router-dom'
 import useWindowSize from '@hooks/useWindowSize'
 
 interface StylesProps {
-  flexDirection?: string
-  alignItems?: string
-  justifyContent?: string
+  flexdirection?: string
+  alignitems?: string
+  justifycontent?: string
   padding?: string
   margin?: string
   height?: string
@@ -35,12 +35,12 @@ const CatalogBanner = (props: any) => {
     <StyledCatalogBanner {...props}>
       {isTablet ? (
         <Flex
-          flexDirection="column"
+          flexdirection="column"
           height="100%"
           width="100%"
-          alignItems="center"
-          justifyContent="flex-end"
-          flexWrap="nowrap"
+          alignitems="center"
+          justifycontent="flex-end"
+          flexwrap="nowrap"
         >
           <Text fontSize="1.5rem" margin="2rem 0" fontWeight="600" color={theme.colors.white}>
             Продажа ингредиентов и вендингового оборудования
@@ -48,8 +48,8 @@ const CatalogBanner = (props: any) => {
           <Link to="/catalog">
             <Button
               border="1px solid"
-              borderColor={theme.colors.button}
-              borderRadius="24px"
+              bordercolor={theme.colors.button}
+              borderradius="24px"
               padding="1rem 2rem"
             >
               Перейти в каталог
@@ -60,9 +60,9 @@ const CatalogBanner = (props: any) => {
         <Flex
           height="100%"
           width="100%"
-          alignItems="flex-end"
-          justifyContent="space-between"
-          flexWrap="nowrap"
+          alignitems="flex-end"
+          justifycontent="space-between"
+          flexwrap="nowrap"
         >
           <Text fontSize="2.5rem" fontWeight="600" color={theme.colors.white}>
             Продажа ингредиентов и вендингового оборудования
@@ -70,8 +70,8 @@ const CatalogBanner = (props: any) => {
           <Link to="/catalog">
             <Button
               border="1px solid"
-              borderColor={theme.colors.button}
-              borderRadius="24px"
+              bordercolor={theme.colors.button}
+              borderradius="24px"
               padding="1rem 2rem"
             >
               Перейти в каталог
@@ -88,7 +88,7 @@ export function ProductsPage() {
   const isTablet = width && width <= 768
   return (
     <>
-      <Flex flexDirection="column" width="100%" alignItems="center">
+      <Flex flexdirection="column" width="100%" alignitems="center">
         {isTablet ? (
           <CatalogBanner margin="2rem 0" padding="8rem 2rem 2rem 2rem" height="auto" />
         ) : (
@@ -113,12 +113,12 @@ export function ProductsPage() {
         <Link to="/catalog">
           <Button
             border="1px solid"
-            borderColor={theme.colors.button}
-            borderRadius="24px"
+            bordercolor={theme.colors.button}
+            borderradius="24px"
             padding="1rem 2rem"
-            backgroundColor={theme.colors.button}
+            backgroundcolor={theme.colors.button}
             color={theme.colors.white}
-            backgroundColorHover={theme.colors.buttonHover}
+            backgroundcolorhover={theme.colors.buttonHover}
           >
             Посмотреть все
           </Button>

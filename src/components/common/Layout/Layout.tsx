@@ -16,7 +16,7 @@ const MainContent = styled.main`
 export default function Layout({ children }: any) {
   return (
     <AppWrapper>
-      <Container padding="1rem" flexGrow="1">
+      <Container padding="1rem" flexgrow="1">
         <Header></Header>
         <MainContent>{children}</MainContent>
       </Container>

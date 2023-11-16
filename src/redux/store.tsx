@@ -1,7 +1,7 @@
 import { legacy_createStore as createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
-import rootReducer from './rootReducer'
-import { loggerMiddleware } from './loggerMiddleware'
+import rootReducer from '@redux/reducers/rootReducer'
+import { loggerMiddleware } from '@redux/middlewares/loggerMiddleware'
 
 const middleware = [thunk, loggerMiddleware]
 

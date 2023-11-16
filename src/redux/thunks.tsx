@@ -1,8 +1,8 @@
 import { ThunkAction } from 'redux-thunk'
-import { RootState } from './rootReducer'
+import { RootState } from '@redux/reducers/rootReducer'
 import { Action } from 'redux'
 import { fetchProducts, fetchProductById } from '@utils/axios'
-import { setProducts, setProduct } from './actions'
+import { setProducts, setProduct } from '@redux/actions/setDataActions'
 
 export const fetchProductsAsync = (
   displayCount: number,

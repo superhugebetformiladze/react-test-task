@@ -1,33 +1,36 @@
 import styled from 'styled-components'
 
 interface StylesProps {
+  width?: string;
   padding?: string
   margin?: string
   border?: string
-  borderRadius?: string
-  borderColor?: string
-  borderColorHover?: string
-  backgroundColor?: string
-  backgroundColorHover?: string
-  colorHover?: string
+  borderradius?: string
+  bordercolor?: string
+  bordercolorhover?: string
+  backgroundcolor?: string
+  backgroundcolorhover?: string
+  colorhover?: string
 }
 
-const StyledButton = styled.div<StylesProps>`
+const StyledButton = styled.button<StylesProps>`
   text-align: center;
   text-wrap: nowrap;
+  user-select: none;
+  width: ${(props) => props.width || 'auto'};
   padding: ${(props) => props.padding || '0'};
   margin: ${(props) => props.margin || '0'};
-  background-color: ${(props) => props.backgroundColor || 'unset'};
+  background-color: ${(props) => props.backgroundcolor || 'unset'};
   color: ${(props) => props.color || props.theme.colors.button};
   border: ${(props) => props.border || 'none'};
-  border-radius: ${(props) => props.borderRadius || '0'};
-  border-color: ${(props) => props.borderColor || props.theme.colors.button};
+  border-radius: ${(props) => props.borderradius || '0'};
+  border-color: ${(props) => props.bordercolor || props.theme.colors.button};
   transition: all 0.3s ease;
 
   &:hover {
-    background-color: ${(props) => props.backgroundColorHover || props.theme.colors.button};
-    border-color: ${(props) => props.color || props.borderColorHover || props.theme.colors.button};
-    color: ${(props) => props.color || props.colorHover || 'unset'};
+    background-color: ${(props) => props.backgroundcolorhover || props.theme.colors.button};
+    border-color: ${(props) => props.color || props.bordercolorhover || props.theme.colors.button};
+    color: ${(props) => props.color || props.colorhover || 'unset'};
     cursor: pointer;
   }
 `

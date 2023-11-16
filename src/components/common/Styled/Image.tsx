@@ -5,17 +5,17 @@ interface StylesProps {
   margin?: string
   width?: string
   height?: string
-  backgroundColor?: string
-  borderRadius?: string
-  objectFit?: string
+  backgroundcolor?: string
+  borderradius?: string
+  objectfit?: string
 }
 
 const StyledImage = styled.img<StylesProps>`
-  border-radius: ${(props) => props.borderRadius || '0'};
+  border-radius: ${(props) => props.borderradius || '0'};
   height: ${(props) => props.height || 'auto'};
   width: ${(props) => props.width || 'auto'};
-  object-fit: ${(props) => props.objectFit || 'initial'};
-  background-color: ${(props) => props.backgroundColor || 'transparent'};
+  object-fit: ${(props) => props.objectfit || 'initial'};
+  background-color: ${(props) => props.backgroundcolor || 'transparent'};
   margin: ${(props) => props.margin || '0'};
   padding: ${(props) => props.padding || '0'};
 `

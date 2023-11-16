@@ -28,16 +28,16 @@ const CardProduct = ({ product, ...props }: ProductProps & StylesProps) => {
   const isMobile = width && width <= 480
   return (
     <StyledCardProduct {...props}>
-      <Flex flexDirection="column" alignItems="center" justifyContent="center">
+      <Flex flexdirection="column" alignitems="center" justifycontent="center">
         {isMobile ? (
           <Image
             src={product.image}
             alt="product"
-            borderRadius="24px"
+            borderradius="24px"
             height="14rem"
             width="100%"
-            objectFit="scale-down"
-            backgroundColor={theme.colors.white}
+            objectfit="scale-down"
+            backgroundcolor={theme.colors.white}
             margin="0 0 1rem"
             padding="1rem"
           />
@@ -45,12 +45,12 @@ const CardProduct = ({ product, ...props }: ProductProps & StylesProps) => {
           <Image
             src={product.image}
             alt="product"
-            borderRadius="24px"
+            borderradius="24px"
             height="18rem"
             width="100%"
-            objectFit="scale-down"
-            backgroundColor={theme.colors.white}
-            margin="0 0 1rem"
+            objectfit="scale-down"
+            backgroundcolor={theme.colors.white}
+            $margin="0 0 1rem"
             padding="1rem"
           />
         )}

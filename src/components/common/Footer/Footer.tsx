@@ -27,11 +27,11 @@ const Footer = (props: any) => {
     <StyledFooter {...props}>
       {isTablet ? (
         <Flex
-          flexDirection="column"
-          alignItems="center"
+          flexdirection="column"
+          alignitems="center"
           padding={isMobile ? '1rem' : '2rem'}
-          backgroundColor={theme.colors.white}
-          borderRadius="24px"
+          backgroundcolor={theme.colors.white}
+          borderradius="24px"
         >
           <Link to="/">
             <Text fontWeight="600" cursor="pointer" fontSize="2rem" margin="1rem 0">
@@ -40,10 +40,10 @@ const Footer = (props: any) => {
           </Link>
           <Button
             border="1px solid"
-            borderColor={theme.colors.button}
-            borderRadius="24px"
+            bordercolor={theme.colors.button}
+            borderradius="24px"
             padding={isMobile ? '0.5rem' : '1rem'}
-            colorHover={theme.colors.white}
+            $colorhover={theme.colors.white}
             margin="1rem 0"
           >
             Связаться с нами
@@ -51,12 +51,12 @@ const Footer = (props: any) => {
         </Flex>
       ) : (
         <Flex
-          flexDirection="row"
-          alignItems="center"
-          justifyContent="space-around"
+          flexdirection="row"
+          alignitems="center"
+          justifycontent="space-around"
           padding="2rem"
-          backgroundColor={theme.colors.white}
-          borderRadius="24px"
+          backgroundcolor={theme.colors.white}
+          borderradius="24px"
         >
           <Link to="/">
             <Text fontWeight="600" cursor="pointer" fontSize="2rem">
@@ -65,10 +65,10 @@ const Footer = (props: any) => {
           </Link>
           <Button
             border="1px solid"
-            borderColor={theme.colors.button}
-            borderRadius="24px"
+            bordercolor={theme.colors.button}
+            borderradius="24px"
             padding="0.5rem 1rem"
-            colorHover={theme.colors.white}
+            $colorhover={theme.colors.white}
           >
             Связаться с нами
           </Button>

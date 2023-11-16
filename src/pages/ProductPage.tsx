@@ -6,11 +6,22 @@ import Image from '@components-common/Styled/Image'
 import Text from '@components-common/Styled/Text'
 import { useFetchProductById } from '@hooks/useFetchProductById'
 import { theme } from '@/index'
+import Counter from '@components-common/Counter/Counter'
+import Button from '@components-common/Button/Button'
+import { addToCart, closeModal, openModal } from '@redux/actions/cartActions'
+import { useDispatch, useSelector } from 'react-redux'
+import ModalComponent from '@components/Order/OrderModal'
+import { RootState } from '@redux/reducers/rootReducer'
 
 export function ProductPage() {
+  const dispatch = useDispatch();
   const { id } = useParams<{ id: string }>()
   const { width } = useWindowSize()
   const isTablet = width && width <= 768
+  const isMobile = width && width <= 480
+
+  const cart = useSelector((state: RootState) => state.cart);
+
 
   const { product, isLoading } = useFetchProductById({ id: id })
 
@@ -22,14 +33,19 @@ export function ProductPage() {
     return <p>No product found</p>
   }
 
+  const handleAddToCart = () => {
+    dispatch(addToCart(product));
+    dispatch(openModal());
+  };
+
   return (
     <>
       {isTablet ? (
         <Flex
-          flexDirection="column"
-          alignItems="center"
-          justifyContent="center"
-          flexWrap="nowrap"
+          flexdirection="column"
+          alignitems="center"
+          justifycontent="center"
+          flexwrap="nowrap"
           margin="2rem"
         >
           <Image
@@ -38,27 +54,42 @@ export function ProductPage() {
             src={product.image}
             alt="product"
             padding="2rem"
-            backgroundColor={theme.colors.white}
-            borderRadius="24px"
+            backgroundcolor={theme.colors.white}
+            borderradius="24px"
             margin="0 0 2rem 0"
-            objectFit="scale-down"
+            objectfit="scale-down"
           />
-          <Flex flexDirection="column" flexGrow="1" padding="1rem 0 0 0">
-            <Text fontWeight="600" fontSize="1.5rem" margin="0 0 1.5rem 0">
+          <Flex flexdirection="column" flexgrow="1" padding="1rem 0 0 0">
+            <Text fontWeight="600" fontSize="1.5rem" margin="0 0 1.3rem 0">
               {product.title}
             </Text>
-            <Text fontWeight="600" fontSize="2rem" margin="0 0 2rem 0">
+            <Text fontWeight="600" fontSize="2rem" margin="0 0 1.3rem 0">
               {product.price}$
             </Text>
+            <Flex margin="0 0 2rem 0" flexdirection={isMobile ? "column" : "row"} width="fit-content">
+              <Counter margin={isMobile ? "0 0 0.5rem 0" : "0 1rem 0 0"} />
+              <Button
+                border="1px solid"
+                bordercolor={theme.colors.button}
+                borderradius="24px"
+                padding={isMobile ? "0.5rem 1.8rem" : "0 2rem"}
+                backgroundcolor={theme.colors.button}
+                color={theme.colors.white}
+                backgroundcolorhover={theme.colors.buttonHover}
+                onClick={handleAddToCart}
+              >
+                В корзину
+              </Button>
+            </Flex>
             <Text>{product.description}</Text>
           </Flex>
         </Flex>
       ) : (
         <Flex
-          flexDirection="row"
-          alignItems="flex-start"
-          justifyContent="center"
-          flexWrap="nowrap"
+          flexdirection="row"
+          alignitems="flex-start"
+          justifycontent="flex-start"
+          flexwrap="nowrap"
           margin="2rem"
         >
           <Image
@@ -67,22 +98,38 @@ export function ProductPage() {
             src={product.image}
             alt="product"
             padding="2rem"
-            backgroundColor={theme.colors.white}
-            borderRadius="24px"
+            backgroundcolor={theme.colors.white}
+            borderradius="24px"
             margin="0 2rem 0 0"
-            objectFit="scale-down"
+            objectfit="scale-down"
           />
-          <Flex flexDirection="column" flexGrow="1" padding="1rem 0 0 0">
+          <Flex flexdirection="column" flexgrow="1" padding="1rem 0 0 0">
             <Text fontWeight="600" fontSize="1.5rem" margin="0 0 1.5rem 0">
               {product.title}
             </Text>
-            <Text fontWeight="600" fontSize="2rem" margin="0 0 2rem 0">
+            <Text fontWeight="600" fontSize="2rem" margin="0 0 1.5rem 0">
               {product.price}$
             </Text>
+            <Flex margin="0 0 2rem 0">
+              <Counter margin="0 1rem 0 0" />
+              <Button
+                border="1px solid"
+                bordercolor={theme.colors.button}
+                borderradius="24px"
+                padding="0 2rem"
+                backgroundcolor={theme.colors.button}
+                color={theme.colors.white}
+                backgroundcolorhover={theme.colors.buttonHover}
+                onClick={handleAddToCart}
+              >
+                В корзину
+              </Button>
+            </Flex>
             <Text>{product.description}</Text>
           </Flex>
         </Flex>
       )}
+      <ModalComponent isOpen={cart.isModalOpen} onClose={() => dispatch(closeModal())} />
     </>
   )
 }

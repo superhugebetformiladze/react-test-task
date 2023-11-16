@@ -27,10 +27,10 @@ const ProductList: React.FC<ProductListProps> = ({ displayCount = 4, showAll = f
 
   return (
     <Flex
-      flexDirection="row"
+      flexdirection="row"
       padding={isTablet ? '2rem 1rem' : '2rem'}
       width="100%"
-      justifyContent="center"
+      justifycontent="center"
     >
       {products.map((product: IProduct) => (
         <Link key={product.id} to={`/product/${product.id}`}>

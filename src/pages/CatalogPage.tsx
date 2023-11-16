@@ -10,7 +10,7 @@ export function CatalogPage() {
   return (
     <>
       {isTablet ? (
-        <Flex flexDirection="column" width="100%" alignItems="center">
+        <Flex flexdirection="column" width="100%" alignitems="center">
           <Text
             fontSize="2rem"
             fontWeight="600"
@@ -23,7 +23,7 @@ export function CatalogPage() {
           <ProductList showAll />
         </Flex>
       ) : (
-        <Flex flexDirection="column" width="100%" alignItems="center">
+        <Flex flexdirection="column" width="100%" alignitems="center">
           <Text fontSize="2rem" fontWeight="600" width="100%" padding="4rem 0 0 4rem">
             Каталог
           </Text>

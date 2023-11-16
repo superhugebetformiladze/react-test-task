@@ -53,9 +53,9 @@ const Header = (props: any) => {
   return (
     <StyledHeader {...props} id="header">
       <Flex
-        flexDirection="row"
-        alignItems="center"
-        justifyContent="space-between"
+        flexdirection="row"
+        alignitems="center"
+        justifycontent="space-between"
         padding="1rem 2rem"
       >
         <Link to="/" onClick={closeMenu}>
@@ -66,7 +66,7 @@ const Header = (props: any) => {
         {isTablet ? (
           <Hamburger onClick={toggleMenu} isInitiallyOpen={menuOpen} />
         ) : (
-          <Flex flexDirection="row" alignItems="center">
+          <Flex flexdirection="row" alignitems="center">
             <Link to="/" onClick={closeMenu}>
               <Text cursor="pointer" margin="0 1rem 0 0">
                 Главная
@@ -79,7 +79,7 @@ const Header = (props: any) => {
         )}
       </Flex>
       {isTablet && menuOpen && (
-        <Flex flexDirection="column" alignItems="center">
+        <Flex flexdirection="column" alignitems="center">
           <Link to="/" onClick={closeMenu}>
             <Text cursor="pointer" margin="1rem 0">
               Главная
