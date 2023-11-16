@@ -21,6 +21,7 @@ export function ProductPage() {
   const isMobile = width && width <= 480
 
   const cart = useSelector((state: RootState) => state.cart)
+  const counterValue = useSelector((state: RootState) => state.counter.data)
 
   const { product, isLoading } = useFetchProductById({ id: id })
 
@@ -33,7 +34,7 @@ export function ProductPage() {
   }
 
   const handleAddToCart = () => {
-    dispatch(addToCart(product))
+    dispatch(addToCart(product, counterValue))
     dispatch(openModal())
   }
 

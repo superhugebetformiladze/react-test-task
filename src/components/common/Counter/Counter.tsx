@@ -23,7 +23,7 @@ const StyledCounter = styled.div<StylesProps>`
   margin: ${(props) => props.margin || '0'};
 `
 
-const Counter: React.FC<CounterProps & StylesProps> = ({ initialValue = 0, ...props }) => {
+const Counter: React.FC<CounterProps & StylesProps> = ({ initialValue = 1, ...props }) => {
   const dispatch = useDispatch()
   const { counter } = useSelector((state: RootState) => state)
 
@@ -44,13 +44,13 @@ const Counter: React.FC<CounterProps & StylesProps> = ({ initialValue = 0, ...pr
           padding="5px 10px"
           borderradius="24px"
           margin="0 10px 0 0"
-          onClick={() => dispatch(increment())}
+          onClick={() => dispatch(decrement())}
         >
-          +
+          -
         </Button>
         <Text margin="0 10px 0 0">{counter.data}</Text>
-        <Button padding="5px 10px" borderradius="24px" onClick={() => dispatch(decrement())}>
-          -
+        <Button padding="5px 10px" borderradius="24px" onClick={() => dispatch(increment())}>
+          +
         </Button>
       </Flex>
     </StyledCounter>

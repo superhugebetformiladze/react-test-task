@@ -64,7 +64,7 @@ const CatalogBanner = (props: any) => {
           justifycontent="space-between"
           flexwrap="nowrap"
         >
-          <Text fontSize="2.5rem" fontWeight="600" color={theme.colors.white}>
+          <Text fontSize="2.5rem" fontWeight="600" color={theme.colors.white} margin="0 2rem 0 0">
             Продажа ингредиентов и вендингового оборудования
           </Text>
           <Link to="/catalog">

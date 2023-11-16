@@ -5,6 +5,8 @@ interface StylesProps {
   margin?: string
   backgroundcolor?: string
   flexgrow?: string
+  width?: string
+  height?: string
 }
 
 const StyledContainer = styled.div<StylesProps>`
@@ -12,6 +14,8 @@ const StyledContainer = styled.div<StylesProps>`
   margin: ${(props) => props.margin || '0'};
   background-color: ${(props) => props.backgroundcolor || 'unset'};
   flex-grow: ${(props) => props.flexgrow || '0'};
+  width: ${(props) => props.width || 'auto'};
+  height: ${(props) => props.height || 'auto'};
 `
 
 const Container = (props: any) => {

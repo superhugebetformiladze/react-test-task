@@ -15,6 +15,7 @@ export const theme = {
     footer: '#000000',
     button: '#f84c26',
     buttonHover: '#df4422',
+    lightGrey: '#e9e9e9',
   },
 }
 

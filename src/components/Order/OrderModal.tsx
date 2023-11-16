@@ -2,10 +2,15 @@ import React, { useEffect, useState } from 'react'
 import { useForm, Controller, SubmitHandler } from 'react-hook-form'
 import styled from 'styled-components'
 import Flex from '@components-common/Styled/Flex'
+import Text from '@components-common/Styled/Text'
 import Button from '@components-common/Button/Button'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import { theme } from '@/index'
+import CartItem from './CartItem'
+import { useSelector } from 'react-redux'
+import { RootState } from '@redux/reducers/rootReducer'
+import Container from '@components/common/Styled/Container'
 
 interface ModalFormProps {
   isOpen: boolean
@@ -27,13 +32,14 @@ const ModalOverlay = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow-y: none;
+  overflow-y: auto;
   z-index: 999;
+  padding: 1rem;
 `
 
 const ModalContent = styled.div`
   background: white;
-  padding: 20px;
+  padding: 30px;
   border-radius: 24px;
   width: 90vw;
   max-width: 500px;
@@ -63,6 +69,8 @@ const ModalForm: React.FC<ModalFormProps> = ({ isOpen, onClose }) => {
   const { control, handleSubmit, reset } = useForm()
   const [isModalOpen, setIsModalOpen] = useState(false)
 
+  const cart = useSelector((state: RootState) => state.cart)
+
   useEffect(() => {
     setIsModalOpen(isOpen)
   }, [isOpen])
@@ -87,9 +95,34 @@ const ModalForm: React.FC<ModalFormProps> = ({ isOpen, onClose }) => {
             <Flex flexdirection="column">
               <FontAwesomeIcon
                 icon={faTimes}
-                size="2x"
+                size="1x"
                 onClick={onClose}
                 style={{ cursor: 'pointer', alignSelf: 'flex-end' }}
+              />
+              <Text fontSize="1.5rem" margin="1rem 0 0 0">
+                Ваш заказ
+              </Text>
+              <Container
+                height="1px"
+                width="100%"
+                backgroundcolor={theme.colors.lightGrey}
+                margin="1rem 0 0 0"
+              />
+              <Flex flexdirection="column" alignitems="flex-start" margin="1rem 0 0 0">
+                {cart.items.map((item, index) => (
+                  <CartItem
+                    key={index}
+                    product={item.product}
+                    quantity={item.quantity}
+                    margin="0 0 1rem 0"
+                  />
+                ))}
+              </Flex>
+              <Container
+                height="1px"
+                width="100%"
+                backgroundcolor={theme.colors.lightGrey}
+                margin="1rem 0 1rem 0"
               />
               <form onSubmit={handleSubmit(onSubmit)}>
                 <Flex flexdirection="column" alignitems="center">
