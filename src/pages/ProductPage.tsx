@@ -14,14 +14,13 @@ import ModalComponent from '@components/Order/OrderModal'
 import { RootState } from '@redux/reducers/rootReducer'
 
 export function ProductPage() {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const { id } = useParams<{ id: string }>()
   const { width } = useWindowSize()
   const isTablet = width && width <= 768
   const isMobile = width && width <= 480
 
-  const cart = useSelector((state: RootState) => state.cart);
-
+  const cart = useSelector((state: RootState) => state.cart)
 
   const { product, isLoading } = useFetchProductById({ id: id })
 
@@ -34,9 +33,9 @@ export function ProductPage() {
   }
 
   const handleAddToCart = () => {
-    dispatch(addToCart(product));
-    dispatch(openModal());
-  };
+    dispatch(addToCart(product))
+    dispatch(openModal())
+  }
 
   return (
     <>
@@ -66,13 +65,17 @@ export function ProductPage() {
             <Text fontWeight="600" fontSize="2rem" margin="0 0 1.3rem 0">
               {product.price}$
             </Text>
-            <Flex margin="0 0 2rem 0" flexdirection={isMobile ? "column" : "row"} width="fit-content">
-              <Counter margin={isMobile ? "0 0 0.5rem 0" : "0 1rem 0 0"} />
+            <Flex
+              margin="0 0 2rem 0"
+              flexdirection={isMobile ? 'column' : 'row'}
+              width="fit-content"
+            >
+              <Counter margin={isMobile ? '0 0 0.5rem 0' : '0 1rem 0 0'} />
               <Button
                 border="1px solid"
                 bordercolor={theme.colors.button}
                 borderradius="24px"
-                padding={isMobile ? "0.5rem 1.8rem" : "0 2rem"}
+                padding={isMobile ? '0.5rem 1.8rem' : '0 2rem'}
                 backgroundcolor={theme.colors.button}
                 color={theme.colors.white}
                 backgroundcolorhover={theme.colors.buttonHover}
