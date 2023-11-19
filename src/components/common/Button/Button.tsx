@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 interface StylesProps {
   width?: string
+  height?: string
   padding?: string
   margin?: string
   border?: string
@@ -18,6 +19,7 @@ const StyledButton = styled.button<StylesProps>`
   text-wrap: nowrap;
   user-select: none;
   width: ${(props) => props.width || 'auto'};
+  height: ${(props) => props.height || 'auto'};
   padding: ${(props) => props.padding || '0'};
   margin: ${(props) => props.margin || '0'};
   background-color: ${(props) => props.backgroundcolor || 'unset'};

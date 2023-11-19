@@ -86,6 +86,7 @@ const Counter: React.FC<CounterProps & StylesProps> = ({
         padding="5px 20px"
         borderradius="24px"
         alignitems="center"
+        flexwrap="nowrap"
       >
         <Button
           padding="5px 10px"

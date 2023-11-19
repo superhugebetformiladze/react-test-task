@@ -13,6 +13,7 @@ import { RootState } from '@redux/reducers/rootReducer'
 import Container from '@components/common/Styled/Container'
 import { getTotalPrice } from '@redux/reducers/cartReducer'
 import { removeFromCart } from '@redux/actions/cartActions'
+import useWindowSize from '@hooks/useWindowSize'
 
 interface ModalFormProps {
   isOpen: boolean
@@ -43,9 +44,9 @@ const ModalOverlay = styled.div`
   }
 `
 
-const ModalContent = styled.div`
+const ModalContent = styled.div<StylesProps>`
   background: white;
-  padding: 30px;
+  padding: ${(props) => props.padding || '30px'};
   border-radius: 24px;
   width: 90vw;
   max-width: 500px;
@@ -72,10 +73,12 @@ const StyledInput = styled.input<StylesProps>`
   outline: none;
 `
 
-const ModalForm: React.FC<ModalFormProps> = ({ isOpen, onClose }) => {
+const ModalForm: React.FC<ModalFormProps & StylesProps> = ({ isOpen, onClose }) => {
   const dispatch = useDispatch()
   const { control, handleSubmit, reset } = useForm()
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const { width } = useWindowSize()
+  const isMobile = width && width <= 480
 
   const cart = useSelector((state: RootState) => state.cart)
 
@@ -102,7 +105,7 @@ const ModalForm: React.FC<ModalFormProps> = ({ isOpen, onClose }) => {
   return (
     <>
       {isOpen && (
-        <ModalOverlay id="modal-overlay" onClick={handleOverlayClick}>
+        <ModalOverlay id="modal-overlay" onClick={handleOverlayClick} >
           <FontAwesomeIcon
             icon={faTimes}
             size="1x"
@@ -116,7 +119,7 @@ const ModalForm: React.FC<ModalFormProps> = ({ isOpen, onClose }) => {
               color: theme.colors.white,
             }}
           />
-          <ModalContent className={isModalOpen ? 'open' : ''}>
+          <ModalContent className={isModalOpen ? 'open' : ''} padding={isMobile ? '10px' : '30px'}>
             <Flex flexdirection="column">
               <Text fontSize="1.5rem" margin="1rem 0 0 0">
                 Ваш заказ
@@ -138,6 +141,7 @@ const ModalForm: React.FC<ModalFormProps> = ({ isOpen, onClose }) => {
                         product={item.product}
                         quantity={item.quantity}
                         margin="0 0 1rem 0"
+                        width="100%"
                         onRemove={(productId) => dispatch(removeFromCart(productId))}
                       />
                     ))}

@@ -9,6 +9,9 @@ import { IProduct } from '@models/ProductModel'
 import Counter from '@components/common/Counter/Counter'
 import { useDispatch } from 'react-redux'
 import { updateQuantity } from '@redux/actions/cartActions'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import useWindowSize from '@hooks/useWindowSize'
 
 interface CartItemProps {
   product: IProduct
@@ -43,6 +46,8 @@ const CartItem: React.FC<CartItemProps & StylesProps> = ({
   ...props
 }) => {
   const dispatch = useDispatch()
+  const { width } = useWindowSize()
+  const isMobile = width && width <= 480
 
   const handleQuantityChange = (productId: number, newQuantity: number) => {
     dispatch(updateQuantity(productId, newQuantity))
@@ -67,30 +72,30 @@ const CartItem: React.FC<CartItemProps & StylesProps> = ({
           padding="0.2rem"
         />
         <Flex flexdirection="column">
-          <Text fontWeight="600" margin="0 0 1rem 0">
+          <Text fontWeight="600" margin="0 0 1rem 0" fontSize={isMobile ? '0.8rem' : '1rem'}>
             {product.title}
           </Text>
-          <Flex flexdirection="row">
-            <Text margin="0 1rem 0 0">Количество: {quantity}</Text>
+          <Flex flexdirection="row" alignitems="center">
             <Counter
               productId={product.id}
-              margin="0 1rem 0 0"
+              margin={isMobile ? '0' : '0 1rem 0 0'}
               initialValue={quantity}
               onChange={handleQuantityChange}
             />
             <Text fontWeight="600">{product.price} $</Text>
-            <Button
-              onClick={handleRemoveClick}
-              backgroundcolor={theme.colors.button}
-              color={theme.colors.white}
-              borderradius="24px"
-              padding="5px 10px"
-              margin="0 0 0 1rem"
-            >
-              Удалить
-            </Button>
           </Flex>
         </Flex>
+        <Button
+          onClick={handleRemoveClick}
+          backgroundcolor={theme.colors.button}
+          color={theme.colors.white}
+          borderradius="24px"
+          padding="5px 10px"
+          margin="0 0 0 auto"
+          height="fit-content"
+        >
+          <FontAwesomeIcon icon={faTimes} />
+        </Button>
       </Flex>
     </StyledCartItem>
   )
