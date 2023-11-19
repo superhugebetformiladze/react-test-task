@@ -11,6 +11,7 @@ import CartItem from './CartItem'
 import { useSelector } from 'react-redux'
 import { RootState } from '@redux/reducers/rootReducer'
 import Container from '@components/common/Styled/Container'
+import { getTotalPrice } from '@redux/reducers/cartReducer'
 
 interface ModalFormProps {
   isOpen: boolean
@@ -35,6 +36,10 @@ const ModalOverlay = styled.div`
   overflow-y: auto;
   z-index: 999;
   padding: 1rem;
+  overflow: hidden;
+  ::-webkit-scrollbar {
+    width: 0;
+  }
 `
 
 const ModalContent = styled.div`
@@ -49,6 +54,7 @@ const ModalContent = styled.div`
     opacity 0.3s,
     transform 0.3s;
   overflow-y: auto;
+  max-height: 80vh;
 
   &.open {
     opacity: 1;
@@ -71,6 +77,8 @@ const ModalForm: React.FC<ModalFormProps> = ({ isOpen, onClose }) => {
 
   const cart = useSelector((state: RootState) => state.cart)
 
+  const totalPrice = useSelector((state: RootState) => getTotalPrice(state.cart))
+
   useEffect(() => {
     setIsModalOpen(isOpen)
   }, [isOpen])
@@ -91,14 +99,21 @@ const ModalForm: React.FC<ModalFormProps> = ({ isOpen, onClose }) => {
     <>
       {isOpen && (
         <ModalOverlay id="modal-overlay" onClick={handleOverlayClick}>
+          <FontAwesomeIcon
+            icon={faTimes}
+            size="1x"
+            onClick={onClose}
+            style={{
+              cursor: 'pointer',
+              alignSelf: 'flex-end',
+              position: 'fixed',
+              top: '5%',
+              left: '90%',
+              color: theme.colors.white,
+            }}
+          />
           <ModalContent className={isModalOpen ? 'open' : ''}>
             <Flex flexdirection="column">
-              <FontAwesomeIcon
-                icon={faTimes}
-                size="1x"
-                onClick={onClose}
-                style={{ cursor: 'pointer', alignSelf: 'flex-end' }}
-              />
               <Text fontSize="1.5rem" margin="1rem 0 0 0">
                 Ваш заказ
               </Text>
@@ -124,6 +139,9 @@ const ModalForm: React.FC<ModalFormProps> = ({ isOpen, onClose }) => {
                 backgroundcolor={theme.colors.lightGrey}
                 margin="1rem 0 1rem 0"
               />
+              <Text margin="1rem 0 0 0" fontWeight="600">
+                Общая сумма: {totalPrice} $
+              </Text>
               <form onSubmit={handleSubmit(onSubmit)}>
                 <Flex flexdirection="column" alignitems="center">
                   <Controller

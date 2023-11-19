@@ -10,7 +10,7 @@ interface StylesProps {
   bacgroundColor?: string
   width?: string
   height?: string
-  textAlign?: string
+  textalign?: string
 }
 
 const StyledText = styled.div<StylesProps>`
@@ -23,7 +23,7 @@ const StyledText = styled.div<StylesProps>`
   background-color: ${(props) => props.bacgroundColor || 'unset'};
   width: ${(props) => props.width || 'auto'};
   height: ${(props) => props.height || 'auto'};
-  text-align: ${(props) => props.textAlign || 'unset'};
+  text-align: ${(props) => props.textalign || 'unset'};
 `
 
 const Text = (props: any) => {

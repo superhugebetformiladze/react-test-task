@@ -8,9 +8,8 @@ import { useFetchProductById } from '@hooks/useFetchProductById'
 import { theme } from '@/index'
 import Counter from '@components-common/Counter/Counter'
 import Button from '@components-common/Button/Button'
-import { addToCart, closeModal, openModal } from '@redux/actions/cartActions'
+import { addToCart, openModal } from '@redux/actions/cartActions'
 import { useDispatch, useSelector } from 'react-redux'
-import ModalComponent from '@components/Order/OrderModal'
 import { RootState } from '@redux/reducers/rootReducer'
 
 export function ProductPage() {
@@ -20,8 +19,7 @@ export function ProductPage() {
   const isTablet = width && width <= 768
   const isMobile = width && width <= 480
 
-  const cart = useSelector((state: RootState) => state.cart)
-  const counterValue = useSelector((state: RootState) => state.counter.data)
+  const globalQuantity = useSelector((state: RootState) => state.counter.globalQuantity)
 
   const { product, isLoading } = useFetchProductById({ id: id })
 
@@ -34,7 +32,8 @@ export function ProductPage() {
   }
 
   const handleAddToCart = () => {
-    dispatch(addToCart(product, counterValue))
+    dispatch(addToCart(product, globalQuantity))
+    // dispatch(setGlobalQuantity(1))
     dispatch(openModal())
   }
 
@@ -71,7 +70,7 @@ export function ProductPage() {
               flexdirection={isMobile ? 'column' : 'row'}
               width="fit-content"
             >
-              <Counter margin={isMobile ? '0 0 0.5rem 0' : '0 1rem 0 0'} />
+              <Counter productId={product.id} margin={isMobile ? '0 0 0.5rem 0' : '0 1rem 0 0'} />
               <Button
                 border="1px solid"
                 bordercolor={theme.colors.button}
@@ -115,7 +114,7 @@ export function ProductPage() {
               {product.price}$
             </Text>
             <Flex margin="0 0 2rem 0">
-              <Counter margin="0 1rem 0 0" />
+              <Counter productId={product.id} margin="0 1rem 0 0" />
               <Button
                 border="1px solid"
                 bordercolor={theme.colors.button}
@@ -133,7 +132,6 @@ export function ProductPage() {
           </Flex>
         </Flex>
       )}
-      <ModalComponent isOpen={cart.isModalOpen} onClose={() => dispatch(closeModal())} />
     </>
   )
 }

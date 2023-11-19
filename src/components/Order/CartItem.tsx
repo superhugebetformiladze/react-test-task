@@ -3,13 +3,16 @@ import styled from 'styled-components'
 import Text from '@components-common/Styled/Text'
 import Flex from '@components-common/Styled/Flex'
 import Image from '@components/common/Styled/Image'
-import Counter from '@components/common/Counter/Counter'
 import { theme } from '@/index'
 import { IProduct } from '@models/ProductModel'
+import Counter from '@components/common/Counter/Counter'
+import { useDispatch } from 'react-redux'
+import { updateQuantity } from '@redux/actions/cartActions'
 
 interface CartItemProps {
   product: IProduct
   quantity?: number
+  onChangeQuantity?: (productId: number, newQuantity: number) => void
 }
 
 interface StylesProps {
@@ -30,7 +33,18 @@ const StyledCartItem = styled.div<StylesProps>`
   border: ${(props) => props.border || 'none'};
 `
 
-const CartItem: React.FC<CartItemProps & StylesProps> = ({ product, quantity, ...props }) => {
+const CartItem: React.FC<CartItemProps & StylesProps> = ({
+  product,
+  quantity,
+  onChangeQuantity,
+  ...props
+}) => {
+  const dispatch = useDispatch()
+
+  const handleQuantityChange = (productId: number, newQuantity: number) => {
+    dispatch(updateQuantity(productId, newQuantity))
+  }
+
   return (
     <StyledCartItem {...props}>
       <Flex flexdirection="row" flexwrap="nowrap">
@@ -51,6 +65,12 @@ const CartItem: React.FC<CartItemProps & StylesProps> = ({ product, quantity, ..
           </Text>
           <Flex flexdirection="row">
             <Text margin="0 1rem 0 0">Количество: {quantity}</Text>
+            <Counter
+              productId={product.id}
+              margin="0 1rem 0 0"
+              initialValue={quantity}
+              onChange={handleQuantityChange}
+            />
             <Text fontWeight="600">{product.price} $</Text>
           </Flex>
         </Flex>

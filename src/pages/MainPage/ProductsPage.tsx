@@ -100,7 +100,7 @@ export function ProductsPage() {
             fontWeight="600"
             width="100%"
             padding="4rem 0 0 0"
-            textAlign="center"
+            textalign="center"
           >
             Наши товары
           </Text>

@@ -6,6 +6,11 @@ export const addToCart = (product: IProduct, quantity: number) => ({
   quantity,
 })
 
+export const updateQuantity = (productId: number, quantity: number) => ({
+  type: 'UPDATE_QUANTITY',
+  payload: { productId, quantity },
+})
+
 export const openModal = () => ({
   type: 'OPEN_MODAL',
 })

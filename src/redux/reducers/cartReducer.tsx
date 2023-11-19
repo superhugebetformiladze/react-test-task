@@ -32,6 +32,16 @@ export const cartReducer = (state = initialState, action: any): CartState => {
         }
       }
 
+    case 'UPDATE_QUANTITY':
+      const updatedItems = state.items.map((item) => {
+        if (item.product.id === action.payload.productId) {
+          const newQuantity = Math.max(1, action.payload.quantity)
+          return { ...item, quantity: newQuantity }
+        }
+        return item
+      })
+      return { ...state, items: updatedItems }
+
     case 'OPEN_MODAL':
       return { ...state, isModalOpen: true }
     case 'CLOSE_MODAL':
@@ -40,3 +50,6 @@ export const cartReducer = (state = initialState, action: any): CartState => {
       return state
   }
 }
+
+export const getTotalPrice = (state: CartState) =>
+  state.items.reduce((total, item) => total + item.product.price * item.quantity, 0).toFixed(2)

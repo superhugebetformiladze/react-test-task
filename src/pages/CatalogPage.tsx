@@ -15,7 +15,7 @@ export function CatalogPage() {
             fontSize="2rem"
             fontWeight="600"
             width="100%"
-            textAlign="center"
+            textalign="center"
             padding="4rem 0 0 0"
           >
             Каталог

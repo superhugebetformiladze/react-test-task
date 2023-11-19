@@ -12,6 +12,7 @@ interface StylesProps {
   backgroundcolor?: string
   borderradius?: string
   border?: string
+  backgroundcolorhover?: string
 }
 
 const StyledFlex = styled.div<StylesProps>`
