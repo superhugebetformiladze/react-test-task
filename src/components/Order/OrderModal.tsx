@@ -8,10 +8,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import { theme } from '@/index'
 import CartItem from './CartItem'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@redux/reducers/rootReducer'
 import Container from '@components/common/Styled/Container'
 import { getTotalPrice } from '@redux/reducers/cartReducer'
+import { removeFromCart } from '@redux/actions/cartActions'
 
 interface ModalFormProps {
   isOpen: boolean
@@ -72,6 +73,7 @@ const StyledInput = styled.input<StylesProps>`
 `
 
 const ModalForm: React.FC<ModalFormProps> = ({ isOpen, onClose }) => {
+  const dispatch = useDispatch()
   const { control, handleSubmit, reset } = useForm()
   const [isModalOpen, setIsModalOpen] = useState(false)
 
@@ -94,6 +96,8 @@ const ModalForm: React.FC<ModalFormProps> = ({ isOpen, onClose }) => {
       onClose()
     }
   }
+
+  const isCartEmpty = cart.items.length === 0
 
   return (
     <>
@@ -123,62 +127,69 @@ const ModalForm: React.FC<ModalFormProps> = ({ isOpen, onClose }) => {
                 backgroundcolor={theme.colors.lightGrey}
                 margin="1rem 0 0 0"
               />
-              <Flex flexdirection="column" alignitems="flex-start" margin="1rem 0 0 0">
-                {cart.items.map((item, index) => (
-                  <CartItem
-                    key={index}
-                    product={item.product}
-                    quantity={item.quantity}
-                    margin="0 0 1rem 0"
-                  />
-                ))}
-              </Flex>
-              <Container
-                height="1px"
-                width="100%"
-                backgroundcolor={theme.colors.lightGrey}
-                margin="1rem 0 1rem 0"
-              />
-              <Text margin="1rem 0 0 0" fontWeight="600">
-                Общая сумма: {totalPrice} $
-              </Text>
-              <form onSubmit={handleSubmit(onSubmit)}>
-                <Flex flexdirection="column" alignitems="center">
-                  <Controller
-                    name="Имя"
-                    control={control}
-                    rules={{ required: true }}
-                    defaultValue=""
-                    render={({ field, fieldState }) => (
-                      <StyledInput
-                        margin="1rem 0 1rem 0"
-                        {...field}
-                        placeholder="Имя"
-                        className={fieldState.invalid ? 'error' : ''}
+              {isCartEmpty ? (
+                <Text margin="1rem 0 1rem 0">Нет товаров в корзине.</Text>
+              ) : (
+                <>
+                  <Flex flexdirection="column" alignitems="flex-start" margin="1rem 0 0 0">
+                    {cart.items.map((item, index) => (
+                      <CartItem
+                        key={index}
+                        product={item.product}
+                        quantity={item.quantity}
+                        margin="0 0 1rem 0"
+                        onRemove={(productId) => dispatch(removeFromCart(productId))}
                       />
-                    )}
+                    ))}
+                  </Flex>
+                  <Container
+                    height="1px"
+                    width="100%"
+                    backgroundcolor={theme.colors.lightGrey}
+                    margin="1rem 0 1rem 0"
                   />
-                  <Controller
-                    name="Почта"
-                    control={control}
-                    defaultValue=""
-                    render={({ field }) => (
-                      <StyledInput margin="0 0 1rem 0" {...field} placeholder="Почта" />
-                    )}
-                  />
-                  <Button
-                    type="submit"
-                    width="fit-content"
-                    padding="10px 20px"
-                    borderradius="24px"
-                    color={theme.colors.white}
-                    backgroundcolor={theme.colors.button}
-                    backgroundcolorhover={theme.colors.buttonHover}
-                  >
-                    Отправить
-                  </Button>
-                </Flex>
-              </form>
+                  <Text margin="1rem 0 0 0" fontWeight="600">
+                    Общая сумма: {totalPrice} $
+                  </Text>
+                  <form onSubmit={handleSubmit(onSubmit)}>
+                    <Flex flexdirection="column" alignitems="center">
+                      <Controller
+                        name="Имя"
+                        control={control}
+                        rules={{ required: true }}
+                        defaultValue=""
+                        render={({ field, fieldState }) => (
+                          <StyledInput
+                            margin="1rem 0 1rem 0"
+                            {...field}
+                            placeholder="Имя"
+                            className={fieldState.invalid ? 'error' : ''}
+                          />
+                        )}
+                      />
+                      <Controller
+                        name="Почта"
+                        control={control}
+                        defaultValue=""
+                        render={({ field }) => (
+                          <StyledInput margin="0 0 1rem 0" {...field} placeholder="Почта" />
+                        )}
+                      />
+                      <Button
+                        type="submit"
+                        width="fit-content"
+                        padding="10px 20px"
+                        borderradius="24px"
+                        color={theme.colors.white}
+                        backgroundcolor={theme.colors.button}
+                        backgroundcolorhover={theme.colors.buttonHover}
+                      >
+                        Отправить
+                      </Button>
+                    </Flex>
+                  </form>
+                </>
+              )}
             </Flex>
           </ModalContent>
         </ModalOverlay>

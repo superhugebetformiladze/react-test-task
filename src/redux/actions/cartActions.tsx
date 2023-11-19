@@ -11,6 +11,11 @@ export const updateQuantity = (productId: number, quantity: number) => ({
   payload: { productId, quantity },
 })
 
+export const removeFromCart = (productId: number) => ({
+  type: 'REMOVE_FROM_CART',
+  payload: { productId },
+})
+
 export const openModal = () => ({
   type: 'OPEN_MODAL',
 })

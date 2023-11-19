@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import Text from '@components-common/Styled/Text'
 import Flex from '@components-common/Styled/Flex'
+import Button from '@components-common/Button/Button'
 import Image from '@components/common/Styled/Image'
 import { theme } from '@/index'
 import { IProduct } from '@models/ProductModel'
@@ -13,6 +14,7 @@ interface CartItemProps {
   product: IProduct
   quantity?: number
   onChangeQuantity?: (productId: number, newQuantity: number) => void
+  onRemove?: (productId: number) => void
 }
 
 interface StylesProps {
@@ -37,12 +39,17 @@ const CartItem: React.FC<CartItemProps & StylesProps> = ({
   product,
   quantity,
   onChangeQuantity,
+  onRemove,
   ...props
 }) => {
   const dispatch = useDispatch()
 
   const handleQuantityChange = (productId: number, newQuantity: number) => {
     dispatch(updateQuantity(productId, newQuantity))
+  }
+
+  const handleRemoveClick = () => {
+    onRemove && onRemove(product.id)
   }
 
   return (
@@ -72,6 +79,16 @@ const CartItem: React.FC<CartItemProps & StylesProps> = ({
               onChange={handleQuantityChange}
             />
             <Text fontWeight="600">{product.price} $</Text>
+            <Button
+              onClick={handleRemoveClick}
+              backgroundcolor={theme.colors.button}
+              color={theme.colors.white}
+              borderradius="24px"
+              padding="5px 10px"
+              margin="0 0 0 1rem"
+            >
+              Удалить
+            </Button>
           </Flex>
         </Flex>
       </Flex>

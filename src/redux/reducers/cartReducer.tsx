@@ -42,6 +42,15 @@ export const cartReducer = (state = initialState, action: any): CartState => {
       })
       return { ...state, items: updatedItems }
 
+    case 'REMOVE_FROM_CART':
+      const updatedItemsDelete = state.items.filter(
+        (item) => item.product.id !== action.payload.productId
+      )
+      return {
+        ...state,
+        items: updatedItemsDelete,
+      }
+
     case 'OPEN_MODAL':
       return { ...state, isModalOpen: true }
     case 'CLOSE_MODAL':
