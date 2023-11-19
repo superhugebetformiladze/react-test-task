@@ -105,7 +105,7 @@ const ModalForm: React.FC<ModalFormProps & StylesProps> = ({ isOpen, onClose }) 
   return (
     <>
       {isOpen && (
-        <ModalOverlay id="modal-overlay" onClick={handleOverlayClick} >
+        <ModalOverlay id="modal-overlay" onClick={handleOverlayClick}>
           <FontAwesomeIcon
             icon={faTimes}
             size="1x"

@@ -9,8 +9,8 @@ import { IProduct } from '@models/ProductModel'
 import Counter from '@components/common/Counter/Counter'
 import { useDispatch } from 'react-redux'
 import { updateQuantity } from '@redux/actions/cartActions'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import useWindowSize from '@hooks/useWindowSize'
 
 interface CartItemProps {
