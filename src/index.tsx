@@ -5,6 +5,7 @@ import App from '@/App'
 import { BrowserRouter } from 'react-router-dom'
 import { createGlobalStyle, ThemeProvider } from 'styled-components'
 import WebFont from 'webfontloader'
+import { CookiesProvider } from 'react-cookie'
 
 export const theme = {
   colors: {
@@ -50,12 +51,14 @@ const AppWrapper = () => {
   }, [])
 
   return (
-    <BrowserRouter>
-      <ThemeProvider theme={theme}>
-        <Global />
-        <App />
-      </ThemeProvider>
-    </BrowserRouter>
+    <CookiesProvider defaultSetOptions={{ path: '/' }}>
+      <BrowserRouter>
+        <ThemeProvider theme={theme}>
+          <Global />
+          <App />
+        </ThemeProvider>
+      </BrowserRouter>
+    </CookiesProvider>
   )
 }
 

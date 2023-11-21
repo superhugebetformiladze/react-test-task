@@ -8,9 +8,10 @@ import { useFetchProductById } from '@hooks/useFetchProductById'
 import { theme } from '@/index'
 import Counter from '@components-common/Counter/Counter'
 import Button from '@components-common/Button/Button'
-import { addToCart, openModal } from '@redux/actions/cartActions'
+import { openModal } from '@redux/actions/cartActions'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@redux/reducers/rootReducer'
+import { useCartCookie } from '@cookies/cartCookies'
 
 export function ProductPage() {
   const dispatch = useDispatch()
@@ -20,6 +21,8 @@ export function ProductPage() {
   const isMobile = width && width <= 480
 
   const globalQuantity = useSelector((state: RootState) => state.counter.globalQuantity)
+
+  const { addToCart } = useCartCookie()
 
   const { product, isLoading } = useFetchProductById({ id: id })
 
@@ -32,9 +35,12 @@ export function ProductPage() {
   }
 
   const handleAddToCart = () => {
-    dispatch(addToCart(product, globalQuantity))
-    // dispatch(setGlobalQuantity(1))
-    dispatch(openModal())
+    try {
+      addToCart(product, globalQuantity)
+      dispatch(openModal())
+    } catch (error) {
+      console.error('Error adding cartCookie:', error)
+    }
   }
 
   return (

@@ -1,12 +1,12 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { openModal } from '@redux/actions/cartActions'
-import { RootState } from '@redux/reducers/rootReducer'
 import styled from 'styled-components'
 import Flex from '@components/common/Styled/Flex'
 import { theme } from '@/index'
+import { useCartCookie } from '@cookies/cartCookies'
 
 interface StylesProps {
   padding?: string
@@ -45,17 +45,17 @@ const FlexStyle = {
 
 export const CartIcon: React.FC<StylesProps> = ({ ...props }) => {
   const dispatch = useDispatch()
-  const cart = useSelector((state: RootState) => state.cart)
+  const { getCartItems } = useCartCookie()
 
   const handleCartIconClick = () => {
-    if (cart.items.length > 0) {
+    if (getCartItems().length > 0) {
       dispatch(openModal())
     }
   }
 
   return (
     <StyledCartIcon {...props}>
-      {cart.items.length > 0 && (
+      {getCartItems().length > 0 && (
         <Flex
           style={FlexStyle}
           padding="20px"

@@ -8,12 +8,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import { theme } from '@/index'
 import CartItem from './CartItem'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from '@redux/reducers/rootReducer'
 import Container from '@components/common/Styled/Container'
-import { getTotalPrice } from '@redux/reducers/cartReducer'
-import { removeFromCart } from '@redux/actions/cartActions'
 import useWindowSize from '@hooks/useWindowSize'
+import { useCartCookie } from '@cookies/cartCookies'
 
 interface ModalFormProps {
   isOpen: boolean
@@ -73,16 +70,13 @@ const StyledInput = styled.input<StylesProps>`
   outline: none;
 `
 
-const ModalForm: React.FC<ModalFormProps & StylesProps> = ({ isOpen, onClose }) => {
-  const dispatch = useDispatch()
+const OrderModal: React.FC<ModalFormProps & StylesProps> = ({ isOpen, onClose }) => {
   const { control, handleSubmit, reset } = useForm()
   const [isModalOpen, setIsModalOpen] = useState(false)
   const { width } = useWindowSize()
   const isMobile = width && width <= 480
-
-  const cart = useSelector((state: RootState) => state.cart)
-
-  const totalPrice = useSelector((state: RootState) => getTotalPrice(state.cart))
+  const { getCartItems, removeFromCart, getTotalPrice } = useCartCookie()
+  const totalPrice = getTotalPrice()
 
   useEffect(() => {
     setIsModalOpen(isOpen)
@@ -100,7 +94,7 @@ const ModalForm: React.FC<ModalFormProps & StylesProps> = ({ isOpen, onClose }) 
     }
   }
 
-  const isCartEmpty = cart.items.length === 0
+  const isCartEmpty = getCartItems().length === 0
 
   return (
     <>
@@ -135,14 +129,14 @@ const ModalForm: React.FC<ModalFormProps & StylesProps> = ({ isOpen, onClose }) 
               ) : (
                 <>
                   <Flex flexdirection="column" alignitems="flex-start" margin="1rem 0 0 0">
-                    {cart.items.map((item, index) => (
+                    {getCartItems().map((item, index) => (
                       <CartItem
                         key={index}
                         product={item.product}
                         quantity={item.quantity}
                         margin="0 0 1rem 0"
                         width="100%"
-                        onRemove={(productId) => dispatch(removeFromCart(productId))}
+                        onRemove={(productId) => removeFromCart(item.product.id)}
                       />
                     ))}
                   </Flex>
@@ -202,4 +196,4 @@ const ModalForm: React.FC<ModalFormProps & StylesProps> = ({ isOpen, onClose }) 
   )
 }
 
-export default ModalForm
+export default OrderModal

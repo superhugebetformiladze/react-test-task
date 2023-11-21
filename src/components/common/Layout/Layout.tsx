@@ -3,7 +3,7 @@ import Footer from '@components-common/Footer/Footer'
 import Header from '@components-common/Header/Header'
 import Container from '@components-common/Styled/Container'
 import { CartIcon } from '@components/Order/CartIcon'
-import ModalComponent from '@components/Order/OrderModal'
+import OrderModal from '@components/Order/OrderModal'
 import { closeModal } from '@redux/actions/cartActions'
 import { RootState } from '@redux/reducers/rootReducer'
 import { useDispatch, useSelector } from 'react-redux'
@@ -25,9 +25,9 @@ const MainContent = styled.main`
 
 export default function Layout({ children }: any) {
   const dispatch = useDispatch()
-  const cart = useSelector((state: RootState) => state.cart)
+  const cart = useSelector((state: RootState) => state.cart.isModalOpen)
   return (
-    <AppWrapper modalopen={cart.isModalOpen}>
+    <AppWrapper modalopen={cart}>
       <Container padding="1rem" flexgrow="1">
         <Header></Header>
         <MainContent>
@@ -36,7 +36,7 @@ export default function Layout({ children }: any) {
         </MainContent>
       </Container>
       <Footer></Footer>
-      <ModalComponent isOpen={cart.isModalOpen} onClose={() => dispatch(closeModal())} />
+      <OrderModal isOpen={cart} onClose={() => dispatch(closeModal())} />
     </AppWrapper>
   )
 }

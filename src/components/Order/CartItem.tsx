@@ -7,11 +7,10 @@ import Image from '@components/common/Styled/Image'
 import { theme } from '@/index'
 import { IProduct } from '@models/ProductModel'
 import Counter from '@components/common/Counter/Counter'
-import { useDispatch } from 'react-redux'
-import { updateQuantity } from '@redux/actions/cartActions'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import useWindowSize from '@hooks/useWindowSize'
+import { useCartCookie } from '@cookies/cartCookies'
 
 interface CartItemProps {
   product: IProduct
@@ -45,12 +44,12 @@ const CartItem: React.FC<CartItemProps & StylesProps> = ({
   onRemove,
   ...props
 }) => {
-  const dispatch = useDispatch()
   const { width } = useWindowSize()
   const isMobile = width && width <= 480
+  const { updateQuantity } = useCartCookie()
 
   const handleQuantityChange = (productId: number, newQuantity: number) => {
-    dispatch(updateQuantity(productId, newQuantity))
+    updateQuantity(productId, newQuantity)
   }
 
   const handleRemoveClick = () => {

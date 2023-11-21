@@ -9,6 +9,7 @@
       "@components-common/*": ["./components/common/*"],
       "@utils/*": ["./utils/*"],
       "@redux/*": ["./redux/*"],
+      "@cookies/*": ["./cookies/*"],
       "@/*": ["./*"]
     }
   }

@@ -46,22 +46,23 @@ const Counter: React.FC<CounterProps & StylesProps> = ({
   const navigate = useNavigate()
 
   useEffect(() => {
-    setQuantity(initialValue)
-    dispatch(setInitialValue(productId, initialValue))
-  }, [dispatch, initialValue, productId])
-
-  useEffect(() => {
-    dispatch(setGlobalQuantity(1))
-  }, [navigate, dispatch])
+    if (!isModalOpen) {
+      dispatch(setGlobalQuantity(1))
+    } else {
+      setQuantity(initialValue)
+      dispatch(setInitialValue(productId, initialValue))
+    }
+  }, [dispatch, initialValue, productId, navigate, isModalOpen])
 
   const handleDecrement = () => {
     setQuantity((prevQuantity) => {
       const newQuantity = Math.max(prevQuantity - 1, 1)
       if (!isModalOpen) {
         dispatch(decrementGlobalQuantity())
+      } else {
+        dispatch(decrement())
+        onChange && onChange(productId, newQuantity)
       }
-      dispatch(decrement())
-      onChange && onChange(productId, newQuantity)
       return newQuantity
     })
   }
@@ -71,9 +72,10 @@ const Counter: React.FC<CounterProps & StylesProps> = ({
       const newQuantity = Math.min(prevQuantity + 1, 100)
       if (!isModalOpen) {
         dispatch(incrementGlobalQuantity())
+      } else {
+        dispatch(increment())
+        onChange && onChange(productId, newQuantity)
       }
-      dispatch(increment())
-      onChange && onChange(productId, newQuantity)
       return newQuantity
     })
   }
