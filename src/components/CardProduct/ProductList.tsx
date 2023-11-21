@@ -5,6 +5,7 @@ import Flex from '@components-common/Styled/Flex'
 import useWindowSize from '@hooks/useWindowSize'
 import { useFetchProducts } from '@hooks/useFetchProducts'
 import { Link } from 'react-router-dom'
+import LoadingSpinner from '@components/common/Loading/LoadingSpinner'
 
 interface ProductListProps {
   displayCount?: number
@@ -18,7 +19,9 @@ const ProductList: React.FC<ProductListProps> = ({ displayCount = 4, showAll = f
   const isMobile = width && width <= 480
 
   if (isLoading) {
-    return <p>Loading...</p>
+    return (
+      <LoadingSpinner />
+    )
   }
 
   if (!products) {

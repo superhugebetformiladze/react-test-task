@@ -12,6 +12,7 @@ import { openModal } from '@redux/actions/cartActions'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@redux/reducers/rootReducer'
 import { useCartCookie } from '@cookies/cartCookies'
+import LoadingSpinner from '@components/common/Loading/LoadingSpinner'
 
 export function ProductPage() {
   const dispatch = useDispatch()
@@ -27,7 +28,9 @@ export function ProductPage() {
   const { product, isLoading } = useFetchProductById({ id: id })
 
   if (isLoading) {
-    return <p>Loading...</p>
+    return ( 
+      <LoadingSpinner />
+    )
   }
 
   if (!product) {
