@@ -9,7 +9,7 @@ export interface CartItem {
 const CART_COOKIE_NAME = 'cart'
 
 export const useCartCookie = () => {
-  const [cookies, setCookie] = useCookies([CART_COOKIE_NAME])
+  const [cookies, setCookie, removeCookie] = useCookies([CART_COOKIE_NAME])
 
   const getCartItems = (): CartItem[] => {
     const cartCookie = cookies[CART_COOKIE_NAME] || []
@@ -18,6 +18,10 @@ export const useCartCookie = () => {
 
   const setCartItems = (items: CartItem[]) => {
     setCookie(CART_COOKIE_NAME, JSON.stringify(items), { path: '/' })
+
+    setTimeout(() => {
+      removeCookie(CART_COOKIE_NAME, { path: '/' })
+    }, 60000)
   }
 
   const addToCart = (product: IProduct, quantity: number) => {
