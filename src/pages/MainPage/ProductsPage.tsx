@@ -15,6 +15,7 @@ interface StylesProps {
   padding?: string
   margin?: string
   height?: string
+  backgroundImage?: string
 }
 
 const StyledCatalogBanner = styled.div<StylesProps>`
@@ -26,6 +27,8 @@ const StyledCatalogBanner = styled.div<StylesProps>`
   width: 100%;
   height: ${(props) => props.height || '70vh'};
   border-radius: 24px;
+  background-image: ${(props) =>
+    props.backgroundImage ? `url(${props.backgroundImage})` : 'none'};
 `
 
 const CatalogBanner = (props: any) => {
@@ -92,7 +95,7 @@ export function ProductsPage() {
         {isTablet ? (
           <CatalogBanner margin="2rem 0" padding="8rem 2rem 2rem 2rem" height="auto" />
         ) : (
-          <CatalogBanner margin="2rem 0" padding="4rem" />
+          <CatalogBanner margin="2rem 0" padding="4rem" backgroundImage="/images/banner.png" />
         )}
         {isTablet ? (
           <Text

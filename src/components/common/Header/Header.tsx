@@ -148,7 +148,9 @@ const Header = memo((props: any) => {
                           Заказы
                         </Text>
                       </Link>
-                      <Button backgroundcolorhover="unset" onClick={logOut}>Выйти</Button>
+                      <Button backgroundcolorhover="unset" onClick={logOut}>
+                        Выйти
+                      </Button>
                     </DropdownMenu>
                   )}
                 </Flex>
@@ -181,27 +183,29 @@ const Header = memo((props: any) => {
             </Text>
           </Link>
           {profile ? (
-          <>
-            <Link to="/orders" onClick={closeDropdownMenu}>
-              <Text cursor="pointer" margin="0.5rem 0">
-                Заказы
-              </Text>
-            </Link>
-            <Button margin="1rem 0" backgroundcolorhover="unset" onClick={logOut}>Выйти</Button>
-          </>
+            <>
+              <Link to="/orders" onClick={closeDropdownMenu}>
+                <Text cursor="pointer" margin="0.5rem 0">
+                  Заказы
+                </Text>
+              </Link>
+              <Button margin="1rem 0" backgroundcolorhover="unset" onClick={logOut}>
+                Выйти
+              </Button>
+            </>
           ) : (
             <Button
-            backgroundcolor={theme.colors.button}
-            color={theme.colors.white}
-            padding="0.5rem 1.5rem"
-            margin="1rem 0"
-            borderradius="24px"
-            backgroundcolorhover={theme.colors.buttonHover}
-            onClick={() => login()}
-          >
-            Войти
-          </Button>
-        )}
+              backgroundcolor={theme.colors.button}
+              color={theme.colors.white}
+              padding="0.5rem 1.5rem"
+              margin="1rem 0"
+              borderradius="24px"
+              backgroundcolorhover={theme.colors.buttonHover}
+              onClick={() => login()}
+            >
+              Войти
+            </Button>
+          )}
         </Flex>
       )}
     </StyledHeader>
