@@ -62,7 +62,6 @@ const CartItem: React.FC<CartItemProps & StylesProps> = ({
         <Image
           src={product.image}
           alt="product"
-          borderradius="24px"
           height="70px"
           width="70px"
           objectfit="scale-down"
@@ -71,13 +70,13 @@ const CartItem: React.FC<CartItemProps & StylesProps> = ({
           padding="0.2rem"
         />
         <Flex flexdirection="column">
-          <Text fontWeight="600" margin="0 0 1rem 0" fontSize={isMobile ? '0.8rem' : '1rem'}>
+          <Text fontWeight="600" margin="0 0.5rem 1rem 0" fontSize={isMobile ? '0.8rem' : '1rem'}>
             {product.title}
           </Text>
           <Flex flexdirection="row" alignitems="center">
             <Counter
               productId={product.id}
-              margin={isMobile ? '0' : '0 1rem 0 0'}
+              margin={isMobile ? '0 0.4rem 0 0' : '0 1rem 0 0'}
               initialValue={quantity}
               onChange={handleQuantityChange}
             />

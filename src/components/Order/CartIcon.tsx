@@ -21,7 +21,7 @@ interface StylesProps {
 
 const StyledCartIcon = styled.div<StylesProps>`
   position: fixed;
-  z-index: 999;
+  z-index: 2;
   top: 7rem;
   right: 1rem;
   padding: ${(props) => props.padding || '0'};

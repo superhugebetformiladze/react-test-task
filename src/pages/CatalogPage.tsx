@@ -1,5 +1,5 @@
 import React from 'react'
-import ProductList from '@components/CardProduct/ProductList'
+import ProductsList from '@components/CardProduct/ProductsList'
 import Flex from '@components-common/Styled/Flex'
 import Text from '@components-common/Styled/Text'
 import useWindowSize from '@hooks/useWindowSize'
@@ -20,14 +20,14 @@ export function CatalogPage() {
           >
             Каталог
           </Text>
-          <ProductList showAll />
+          <ProductsList showAll />
         </Flex>
       ) : (
         <Flex flexdirection="column" width="100%" alignitems="center">
           <Text fontSize="2rem" fontWeight="600" width="100%" padding="4rem 0 0 4rem">
             Каталог
           </Text>
-          <ProductList showAll />
+          <ProductsList showAll />
         </Flex>
       )}
     </>

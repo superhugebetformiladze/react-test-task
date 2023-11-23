@@ -13,10 +13,12 @@ interface StylesProps {
   borderradius?: string
   border?: string
   backgroundcolorhover?: string
+  position?: string
 }
 
 const StyledFlex = styled.div<StylesProps>`
   display: flex;
+  position: ${(props) => props.position || 'static'};
   flex-direction: ${(props) => props.flexdirection || 'row'};
   align-items: ${(props) => props.alignitems || 'stretch'};
   justify-content: ${(props) => props.justifycontent || 'stretch'};

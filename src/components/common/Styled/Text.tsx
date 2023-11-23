@@ -11,6 +11,9 @@ interface StylesProps {
   width?: string
   height?: string
   textalign?: string
+  bordercolorhover?: string
+  backgroundcolorhover?: string
+  colorhover?: string
 }
 
 const StyledText = styled.div<StylesProps>`
@@ -24,6 +27,11 @@ const StyledText = styled.div<StylesProps>`
   width: ${(props) => props.width || 'auto'};
   height: ${(props) => props.height || 'auto'};
   text-align: ${(props) => props.textalign || 'unset'};
+  &:hover {
+    background-color: ${(props) => props.backgroundcolorhover || 'unset'};
+    border-color: ${(props) => props.color || props.bordercolorhover || 'unset'};
+    color: ${(props) => props.color || props.colorhover || 'unset'};
+  }
 `
 
 const Text = (props: any) => {

@@ -1,5 +1,5 @@
 import React from 'react'
-import ProductList from '@components/CardProduct/ProductList'
+import ProductsList from '@components/CardProduct/ProductsList'
 import Flex from '@components-common/Styled/Flex'
 import Text from '@components-common/Styled/Text'
 import styled from 'styled-components'
@@ -109,7 +109,7 @@ export function ProductsPage() {
             Наши товары
           </Text>
         )}
-        <ProductList />
+        <ProductsList />
         <Link to="/catalog">
           <Button
             border="1px solid"

@@ -50,7 +50,7 @@ const CardProduct = ({ product, ...props }: ProductProps & StylesProps) => {
             width="100%"
             objectfit="scale-down"
             backgroundcolor={theme.colors.white}
-            $margin="0 0 1rem"
+            margin="0 0 1rem"
             padding="1rem"
           />
         )}

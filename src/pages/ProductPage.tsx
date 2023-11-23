@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { useParams } from 'react-router-dom'
 import useWindowSize from '@hooks/useWindowSize'
 import Flex from '@components-common/Styled/Flex'
@@ -27,19 +27,19 @@ export function ProductPage() {
 
   const { product, isLoading } = useFetchProductById({ id: id })
 
+  const memoizedProduct = useMemo(() => product, [product])
+
   if (isLoading) {
-    return ( 
-      <LoadingSpinner />
-    )
+    return <LoadingSpinner />
   }
 
-  if (!product) {
+  if (!memoizedProduct) {
     return <p>No product found</p>
   }
 
   const handleAddToCart = () => {
     try {
-      addToCart(product, globalQuantity)
+      addToCart(memoizedProduct, globalQuantity)
       dispatch(openModal())
     } catch (error) {
       console.error('Error adding cartCookie:', error)
@@ -59,7 +59,7 @@ export function ProductPage() {
           <Image
             height="60vh"
             width="70vw"
-            src={product.image}
+            src={memoizedProduct.image}
             alt="product"
             padding="2rem"
             backgroundcolor={theme.colors.white}
@@ -69,17 +69,20 @@ export function ProductPage() {
           />
           <Flex flexdirection="column" flexgrow="1" padding="1rem 0 0 0">
             <Text fontWeight="600" fontSize="1.5rem" margin="0 0 1.3rem 0">
-              {product.title}
+              {memoizedProduct.title}
             </Text>
             <Text fontWeight="600" fontSize="2rem" margin="0 0 1.3rem 0">
-              {product.price}$
+              {memoizedProduct.price}$
             </Text>
             <Flex
               margin="0 0 2rem 0"
               flexdirection={isMobile ? 'column' : 'row'}
               width="fit-content"
             >
-              <Counter productId={product.id} margin={isMobile ? '0 0 0.5rem 0' : '0 1rem 0 0'} />
+              <Counter
+                productId={memoizedProduct.id}
+                margin={isMobile ? '0 0 0.5rem 0' : '0 1rem 0 0'}
+              />
               <Button
                 border="1px solid"
                 bordercolor={theme.colors.button}
@@ -93,7 +96,7 @@ export function ProductPage() {
                 В корзину
               </Button>
             </Flex>
-            <Text>{product.description}</Text>
+            <Text>{memoizedProduct.description}</Text>
           </Flex>
         </Flex>
       ) : (
@@ -107,7 +110,7 @@ export function ProductPage() {
           <Image
             height="30rem"
             width="22rem"
-            src={product.image}
+            src={memoizedProduct.image}
             alt="product"
             padding="2rem"
             backgroundcolor={theme.colors.white}
@@ -117,13 +120,13 @@ export function ProductPage() {
           />
           <Flex flexdirection="column" flexgrow="1" padding="1rem 0 0 0">
             <Text fontWeight="600" fontSize="1.5rem" margin="0 0 1.5rem 0">
-              {product.title}
+              {memoizedProduct.title}
             </Text>
             <Text fontWeight="600" fontSize="2rem" margin="0 0 1.5rem 0">
-              {product.price}$
+              {memoizedProduct.price}$
             </Text>
             <Flex margin="0 0 2rem 0">
-              <Counter productId={product.id} margin="0 1rem 0 0" />
+              <Counter productId={memoizedProduct.id} margin="0 1rem 0 0" />
               <Button
                 border="1px solid"
                 bordercolor={theme.colors.button}
@@ -137,7 +140,7 @@ export function ProductPage() {
                 В корзину
               </Button>
             </Flex>
-            <Text>{product.description}</Text>
+            <Text>{memoizedProduct.description}</Text>
           </Flex>
         </Flex>
       )}
