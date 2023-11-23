@@ -138,12 +138,13 @@ const Header = memo((props: any) => {
                     borderradius="50%"
                     height="3rem"
                     width="3rem"
+                    cursor="pointer"
                     onClick={toggleDropdownMenu}
                   />
                   {dropdownMenuOpen && (
                     <DropdownMenu id="dropdown-menu">
                       <Link to="/orders" onClick={closeDropdownMenu}>
-                        <Text cursor="pointer" margin="1rem 0">
+                        <Text cursor="pointer" margin="0 0 1rem 0">
                           Заказы
                         </Text>
                       </Link>

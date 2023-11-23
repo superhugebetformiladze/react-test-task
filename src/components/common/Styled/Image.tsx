@@ -8,6 +8,7 @@ interface StylesProps {
   backgroundcolor?: string
   borderradius?: string
   objectfit?: string
+  cursor?: string
 }
 
 const StyledImage = styled.img<StylesProps>`
@@ -18,6 +19,7 @@ const StyledImage = styled.img<StylesProps>`
   background-color: ${(props) => props.backgroundcolor || 'transparent'};
   margin: ${(props) => props.margin || '0'};
   padding: ${(props) => props.padding || '0'};
+  cursor: ${(props) => props.cursor || 'auto'};
 `
 
 const Image = (props: any) => {
