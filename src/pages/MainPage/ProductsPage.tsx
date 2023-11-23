@@ -95,7 +95,7 @@ export function ProductsPage() {
         {isTablet ? (
           <CatalogBanner margin="2rem 0" padding="8rem 2rem 2rem 2rem" height="auto" backgroundImage="/images/banner.png" />
         ) : (
-          <CatalogBanner margin="2rem 0" padding="4rem" backgroundImage="/images/banner.png" />
+          <CatalogBanner margin="2rem 0" padding="3rem" backgroundImage="/images/banner.png" />
         )}
         {isTablet ? (
           <Text
