@@ -1,46 +1,51 @@
-# Getting Started with Create React App
+# Тестовое задание
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Проект реализован на React typescript, представляет из себя простой аналог интернет-магазина
 
-## Available Scripts
+### Для сайта были сделаны:
+- Главная страница с общей информацией о компании
+- Страница каталога товаров
+- Страницы продуктов
+- Корзина в виде модального окна
 
-In the project directory, you can run:
+## Описание реализации проекта
 
-### `npm start`
+### Авторизация:
+- авторизация и аунтефикация реализованы с помощью `Google-oAuth`
+```bash
+"@react-oauth/google": "^0.12.1"
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Страницы и компоненты:
+- Для всех страниц и компонентов для стилизации были использованы  `styled-component`.
+- Страницы были обернуты в `Layout` Component.
+- Для страниц с продуктами были реализованы динамические пути.
+- Компонент корзины реализован в виде модального окна, которое отображается только в случае наличия продуктов в корзине.
+- Реализована навигация с помощью компонента `Header`.
+- На мобильной версии сайта `Header` скрывается в компонент бургер-меню.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Получение и хранение данных:
 
-### `npm test`
+#### Redux и Axios
+- Данные получаются с открытого сервера [Fake store api](https://fakestoreapi.com/) в виде JSON файла с помощью `axios`.
+- К каждому запросу добавляется заголовок с помощью `Axios interceptors`.
+- Получение обрабатывается с помощью `redux-thunk`.
+- Также для для работы с получением продуктов использует `redux`.
+- `Redux store` разбит на подсторы `cartReducer`, `counterReducer`, `productReducer`, `productsReducer` которые объединяются в `rootReducer`.
+- Для доступа к стора используются `actions`.
+- Реализован свой логгер который вместе с `thunk` запускается в сторе через middleware.
+#### Cookies и LocalStorage
+- Для хранения состояния корзины используется `cookie`: после любого действия пользователя относящегося к изменении корзины, ее состояние обновляется в `cookie`.
+- Корзина очищается через 1 минуту после ее последнего изменения.
+- Данные пользователя сохраняются в LocalStorage после авторизации на сайте и удаляются после выхода из аккаунта.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Хуки:
+- Для отслеживания размеров экрана используется хук `useWindowSize`.
+- Для удобства работы с данными, приходящими с сервера, были реализованы хуки - `useFetchProducts` и `useFetchProductById` они запускают необходимые функции из `thunks.tsx`.
+- Логика работы с `Google-oAuth` вынесена в хук `useGoogleAuth`, в нем происходит получение данных пользователя, авторизации и выход из аккаунта.
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Отправка данных:
+- Отправка данных реализована с помощью `react-hook-form` с использованием контроллеров
+```bash
+"react-hook-form": "^7.48.2"
+```
