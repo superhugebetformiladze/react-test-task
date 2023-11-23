@@ -18,6 +18,13 @@ export const useGoogleAuth = ({ onLoginSuccess, onLogoutSuccess }: UseGoogleAuth
   const [profile, setProfile] = useState<UserProfile | null>(null)
   const prevUser = useRef<any>(null)
 
+  useEffect(() => {
+    const storedUser = localStorage.getItem('user')
+    if (storedUser) {
+      setUser(JSON.parse(storedUser))
+    }
+  }, [])
+
   const login = useGoogleLogin({
     onSuccess: (codeResponse) => setUser(codeResponse),
     onError: (error) => console.log('Login Failed:', error),
@@ -38,6 +45,8 @@ export const useGoogleAuth = ({ onLoginSuccess, onLogoutSuccess }: UseGoogleAuth
           const userProfile: UserProfile = res.data
           setProfile(userProfile)
           onLoginSuccess(userProfile)
+
+          localStorage.setItem('user', JSON.stringify(user))
         })
         .catch((err) => console.log(err))
     }
@@ -47,6 +56,8 @@ export const useGoogleAuth = ({ onLoginSuccess, onLogoutSuccess }: UseGoogleAuth
     googleLogout()
     setProfile(null)
     onLogoutSuccess()
+
+    localStorage.removeItem('user')
   }
 
   return {
